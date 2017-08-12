@@ -93,17 +93,17 @@
 
 
 
-<meta name="description" content="作为一个前端开发人员，这次的这篇博客文章终于“正常”了。  这应该算是一个造轮子的实践，JS的图片开源裁剪器有很多，像使用JQuery库编写的copper插件很多，在github上边的star数量也不少，现流行的前端框架也肯定有对应的图片裁剪器，都是可以选择的成熟的技术方案。但不是所有的情况都能适用，设计师的要求，本身项目的条件限制等等原因，有些时候，还是“自己动手，丰衣足食”啊！ 因为用到了很">
+<meta name="description" content="作为一个前端开发人员，这次的这篇博客文章终于“正常”了。  这应该算是一个造轮子的实践，JS的图片开源裁剪器有很多，像使用JQuery库编写的cropper插件很多，在github上边的star数量也不少，现流行的前端框架也肯定有对应的图片裁剪器，都是可以选择的成熟的技术方案。但不是所有的情况都能适用，设计师的要求，本身项目的条件限制等等原因，有些时候，还是“自己动手，丰衣足食”啊！ 因为用到了">
 <meta name="keywords" content="web前端,canvas">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用原生JS编写一个图片裁剪器">
 <meta property="og:url" content="http://classlfz.com/2017/07/23/write-an-image-scissors/index.html">
 <meta property="og:site_name" content="classlfz的笔记本">
-<meta property="og:description" content="作为一个前端开发人员，这次的这篇博客文章终于“正常”了。  这应该算是一个造轮子的实践，JS的图片开源裁剪器有很多，像使用JQuery库编写的copper插件很多，在github上边的star数量也不少，现流行的前端框架也肯定有对应的图片裁剪器，都是可以选择的成熟的技术方案。但不是所有的情况都能适用，设计师的要求，本身项目的条件限制等等原因，有些时候，还是“自己动手，丰衣足食”啊！ 因为用到了很">
-<meta property="og:updated_time" content="2017-07-23T04:23:45.993Z">
+<meta property="og:description" content="作为一个前端开发人员，这次的这篇博客文章终于“正常”了。  这应该算是一个造轮子的实践，JS的图片开源裁剪器有很多，像使用JQuery库编写的cropper插件很多，在github上边的star数量也不少，现流行的前端框架也肯定有对应的图片裁剪器，都是可以选择的成熟的技术方案。但不是所有的情况都能适用，设计师的要求，本身项目的条件限制等等原因，有些时候，还是“自己动手，丰衣足食”啊！ 因为用到了">
+<meta property="og:updated_time" content="2017-08-12T15:25:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用原生JS编写一个图片裁剪器">
-<meta name="twitter:description" content="作为一个前端开发人员，这次的这篇博客文章终于“正常”了。  这应该算是一个造轮子的实践，JS的图片开源裁剪器有很多，像使用JQuery库编写的copper插件很多，在github上边的star数量也不少，现流行的前端框架也肯定有对应的图片裁剪器，都是可以选择的成熟的技术方案。但不是所有的情况都能适用，设计师的要求，本身项目的条件限制等等原因，有些时候，还是“自己动手，丰衣足食”啊！ 因为用到了很">
+<meta name="twitter:description" content="作为一个前端开发人员，这次的这篇博客文章终于“正常”了。  这应该算是一个造轮子的实践，JS的图片开源裁剪器有很多，像使用JQuery库编写的cropper插件很多，在github上边的star数量也不少，现流行的前端框架也肯定有对应的图片裁剪器，都是可以选择的成熟的技术方案。但不是所有的情况都能适用，设计师的要求，本身项目的条件限制等等原因，有些时候，还是“自己动手，丰衣足食”啊！ 因为用到了">
 
 
 
@@ -335,7 +335,7 @@
         <blockquote>
 <p>作为一个前端开发人员，这次的这篇博客文章终于“正常”了。</p>
 </blockquote>
-<p>这应该算是一个造轮子的实践，JS的图片开源裁剪器有很多，像使用JQuery库编写的<code>copper</code>插件很多，在github上边的star数量也不少，现流行的前端框架也肯定有对应的图片裁剪器，都是可以选择的成熟的技术方案。但不是所有的情况都能适用，设计师的要求，本身项目的条件限制等等原因，有些时候，还是“自己动手，丰衣足食”啊！</p>
+<p>这应该算是一个造轮子的实践，JS的图片开源裁剪器有很多，像使用JQuery库编写的<code>cropper</code>插件很多，在github上边的star数量也不少，现流行的前端框架也肯定有对应的图片裁剪器，都是可以选择的成熟的技术方案。但不是所有的情况都能适用，设计师的要求，本身项目的条件限制等等原因，有些时候，还是“自己动手，丰衣足食”啊！</p>
 <p><strong>因为用到了很多<code>html5</code>的特性，所以，这里编写的图片裁剪器，只能是适合于支持这些HTML5特性的浏览器才能够正常的使用。</strong></p>
 <h2 id="需求描述"><a href="#需求描述" class="headerlink" title="需求描述"></a>需求描述</h2><ul>
 <li><p>点击按钮选择图片，并进行展示；</p>
@@ -365,7 +365,7 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 处理拖拽</div><div class="line">  * @param &#123;Object&#125; e 鼠标移动事件</div><div class="line">  */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">dragging</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">  <span class="comment">// *** 图片不存在 ***</span></div><div class="line">  <span class="keyword">if</span> (!avatorImg.src) <span class="keyword">return</span>;</div><div class="line">  </div><div class="line">  <span class="comment">// *** 图片存在 ***</span></div><div class="line">  <span class="comment">// X轴</span></div><div class="line">  <span class="keyword">let</span> _moveX = avatorImg.offsetLeft + e.clientX - mouseStartX;</div><div class="line">  <span class="comment">// 这里的100是HTML里边overlayInner的border属性的宽度</span></div><div class="line">  <span class="comment">// 下边的400就是overlayInner元素的边长加上border的宽度之和</span></div><div class="line">  <span class="keyword">if</span> (_moveX &gt;= <span class="number">100</span>) &#123;</div><div class="line">    avatorImg.style.left = <span class="string">'100px'</span>;</div><div class="line">    mouseStartX = e.clientX;</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (_moveX &lt;= <span class="number">400</span> - avatorImg.offsetWidth) &#123;</div><div class="line">    _moveX = <span class="number">400</span> - avatorImg.offsetWidth;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  avatorImg.style.left = _moveX + <span class="string">'px'</span>;</div><div class="line">  mouseStartX = e.clientX;</div><div class="line"></div><div class="line">  <span class="comment">// Y轴</span></div><div class="line">  <span class="keyword">let</span> _moveY = avatorImg.offsetTop + e.clientY - mouseStartY;</div><div class="line">  <span class="keyword">if</span> (_moveY &gt;= <span class="number">100</span>) &#123;</div><div class="line">    avatorImg.style.top = <span class="string">'100px'</span>;</div><div class="line">    mouseStartY = e.clientY;</div><div class="line">    <span class="keyword">return</span>;</div><div class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (_moveY &lt;= <span class="number">400</span> - avatorImg.offsetHeight) &#123;</div><div class="line">    _moveY = <span class="number">400</span> - avatorImg.offsetHeight;</div><div class="line">  &#125;</div><div class="line">  avatorImg.style.top = _moveY + <span class="string">'px'</span>;</div><div class="line">  mouseStartY = e.clientY;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="裁剪"><a href="#裁剪" class="headerlink" title="裁剪"></a>裁剪</h2><p>最后，我们利用HTML5的canvas元素具有的<a href="https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/drawImage" target="_blank" rel="external"><code>ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);</code></a>方法，描绘出位于裁剪区的图片信息。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">  * 对图片进行裁剪</div><div class="line">  */</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">crop</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (!avatorImg.src) <span class="keyword">return</span>;</div><div class="line">  <span class="keyword">let</span> _cropCanvas = <span class="built_in">document</span>.createElement(<span class="string">'canvas'</span>);</div><div class="line">  <span class="comment">// 计算边长</span></div><div class="line">  <span class="keyword">let</span> _side = (showSide / avatorImg.offsetWidth) * primitiveLength.width;</div><div class="line">  _cropCanvas.width = _side;</div><div class="line">  _cropCanvas.height = _side;</div><div class="line">  <span class="comment">// 计算截取时从原图片的原始长度的坐标</span></div><div class="line">  <span class="comment">// 因为图片有可能会被放大/缩小，这时候，初始化时记录下来的primitiveLength信息就有用处了</span></div><div class="line">  <span class="keyword">let</span> _sy = (<span class="number">100</span> - avatorImg.offsetTop) / avatorImg.offsetHeight * primitiveLength.height;</div><div class="line">  <span class="keyword">let</span> _sx = (<span class="number">100</span> - avatorImg.offsetLeft) / avatorImg.offsetWidth * primitiveLength.width;</div><div class="line">  <span class="comment">// 绘制图片</span></div><div class="line">  _cropCanvas.getContext(<span class="string">'2d'</span>).drawImage(avatorImg, _sx, _sy, _side, _side, <span class="number">0</span>, <span class="number">0</span>, _side, _side);</div><div class="line">  <span class="comment">// 保存图片信息</span></div><div class="line">  <span class="keyword">let</span> _lastImageData = _cropCanvas.toDataURL(croppedImageType);</div><div class="line">  <span class="comment">// 将裁剪出来的信息展示</span></div><div class="line">  imageShow.src = _lastImageData;</div><div class="line">  imageShow.style.width = showSide + <span class="string">'px'</span>;</div><div class="line">  imageShow.style.height = showSide + <span class="string">'px'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><a href="https://github.com/classlfz/my-blog/examples/write-an-image-scissors.html" download="write-an-image-scissors" target="_blank" rel="external">下载例子</a></p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p><a href="https://github.com/classLfz/my-blog/blob/master/examples/write-an-image-scissors.html" target="_blank" rel="external">查看完整代码</a></p>
 
       
     </div>
@@ -419,6 +419,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/12/my-games/" rel="prev" title="写过的小玩具">
+                写过的小玩具 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -491,7 +495,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -502,7 +506,7 @@
             
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -513,7 +517,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
