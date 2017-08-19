@@ -10,6 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
 
 
 
@@ -74,7 +75,7 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="node.js,apidoc," />
@@ -86,7 +87,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -100,8 +101,9 @@
 <meta property="og:url" content="http://classlfz.com/2017/01/15/use-apidoc-to-write-api-doc/index.html">
 <meta property="og:site_name" content="classlfz的笔记本">
 <meta property="og:description" content="本文基于node.js的代码注释编写。  程序员都不喜欢写文档，但是程序员习惯写注释。所以今天给大家安利一个注释文档的工具——apidoc，一个在注释里边编写API文档的小工具！ 由于经验以及英文水平问题，文中很有可能会有错漏，各位大神如果看出来了，麻烦指出一下。谢谢～ 安装apidoc1npm install -g apidoc 运行1apidoc -i myapp/ -o apidoc/ -">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1626912-5555c6d326baadf2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-07-02T05:17:24.789Z">
+<meta property="og:updated_time" content="2017-07-22T01:38:08.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用apidoc在注释里写API文档">
 <meta name="twitter:description" content="本文基于node.js的代码注释编写。  程序员都不喜欢写文档，但是程序员习惯写注释。所以今天给大家安利一个注释文档的工具——apidoc，一个在注释里边编写API文档的小工具！ 由于经验以及英文水平问题，文中很有可能会有错漏，各位大神如果看出来了，麻烦指出一下。谢谢～ 安装apidoc1npm install -g apidoc 运行1apidoc -i myapp/ -o apidoc/ -">
@@ -114,12 +116,13 @@
   var CONFIG = {
     root: '/',
     scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
-      author: 'classLfz'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -141,12 +144,6 @@
 
   <title>利用apidoc在注释里写API文档 | classlfz的笔记本</title>
   
-
-
-
-
-
-
 
 
 
@@ -219,6 +216,16 @@
           </a>
         </li>
       
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
 
       
     </ul>
@@ -247,13 +254,17 @@
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://classlfz.com/2017/01/15/use-apidoc-to-write-api-doc/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="classLfz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -328,6 +339,9 @@
       </header>
     
 
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -534,27 +548,15 @@
 <h2 id="编写gulp代码"><a href="#编写gulp代码" class="headerlink" title="编写gulp代码"></a>编写gulp代码</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 构建apidoc</span></div><div class="line">gulp.task(<span class="string">'apidoc'</span>, (done) =&gt; &#123;</div><div class="line">  apidoc(&#123;</div><div class="line">    <span class="attr">src</span>: <span class="string">'src/'</span>,</div><div class="line">    <span class="attr">dest</span>: <span class="string">'docs'</span>,</div><div class="line">    <span class="attr">debug</span>: <span class="literal">true</span>,</div><div class="line">    <span class="attr">includeFilters</span>: [<span class="string">'.*\\.js$'</span>]</div><div class="line">  &#125;, done);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
       
     </div>
+    
+    
+    
 
-    <div>
-      
-        
+    
 
-      
-    </div>
+    
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
+    
 
     <footer class="post-footer">
       
@@ -596,6 +598,10 @@
       
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -612,6 +618,8 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMDI3NS82ODMw"></div>
     
   </div>
 
@@ -648,7 +656,7 @@
       <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/images/avatar.jpg"
+               src="/images/avatar.gif"
                alt="classLfz" />
           <p class="site-author-name" itemprop="name">classLfz</p>
            
@@ -745,22 +753,32 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">classLfz</span>
+
+  
 </div>
 
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
+  <div class="powered-by">
+    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+  </div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">
+    主题 &mdash;
+    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+      NexT.Muse
+    </a>
+  </div>
 
 
         
+
+
+
+
+
+
 
         
       </div>
@@ -826,25 +844,24 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
 
 
 
   
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
 
 
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
@@ -869,6 +886,19 @@
 
 
   
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
 
 
 
