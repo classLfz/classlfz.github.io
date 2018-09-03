@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -37,36 +37,11 @@
 
 
 
+
   
   
   <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
 
 
 
@@ -75,7 +50,22 @@
 
 <link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
 
 
   <meta name="keywords" content="node.js,express,jwt," />
@@ -83,11 +73,6 @@
 
 
 
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -102,7 +87,7 @@
 <meta property="og:site_name" content="classlfz的笔记本">
 <meta property="og:description" content="最近由于项目需要，学习了一下JWT这种身份验证的方法。在这里做一下总结。本文主要是做一些总结，参考文章链接：JSON Web Token - 在Web应用间安全地传递信息  什么是JWTJWT是一种用于双方之间传递安全信息的简洁的、URL安全的表述性声明规范。  简洁(Compact): 可以通过URL，POST参数或者在HTTP header发送，因为数据量小，传输速度也很快; 自包含(Sel">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-07-22T01:38:08.743Z">
+<meta property="og:updated_time" content="2017-12-10T08:44:56.162Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="express编写JWT中间件">
 <meta name="twitter:description" content="最近由于项目需要，学习了一下JWT这种身份验证的方法。在这里做一下总结。本文主要是做一些总结，参考文章链接：JSON Web Token - 在Web应用间安全地传递信息  什么是JWTJWT是一种用于双方之间传递安全信息的简洁的、URL安全的表述性声明规范。  简洁(Compact): 可以通过URL，POST参数或者在HTTP header发送，因为数据量小，传输速度也很快; 自包含(Sel">
@@ -113,11 +98,12 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
-    motion: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
       userId: '0',
       author: '博主'
@@ -159,7 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -211,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
           </a>
         </li>
       
@@ -347,7 +323,7 @@
 
       
         <blockquote>
-<p>最近由于项目需要，学习了一下JWT这种身份验证的方法。在这里做一下总结。<br>本文主要是做一些总结，参考文章链接：<a href="http://blog.leapoahead.com/2015/09/06/understanding-jwt/" target="_blank" rel="external">JSON Web Token - 在Web应用间安全地传递信息</a></p>
+<p>最近由于项目需要，学习了一下JWT这种身份验证的方法。在这里做一下总结。<br>本文主要是做一些总结，参考文章链接：<a href="http://blog.leapoahead.com/2015/09/06/understanding-jwt/" target="_blank" rel="noopener">JSON Web Token - 在Web应用间安全地传递信息</a></p>
 </blockquote>
 <h1 id="什么是JWT"><a href="#什么是JWT" class="headerlink" title="什么是JWT"></a>什么是JWT</h1><p>JWT是一种用于双方之间传递安全信息的简洁的、URL安全的表述性声明规范。</p>
 <ul>
@@ -362,7 +338,7 @@
 </ul>
 <p>整体结构为:<br><code>xxxxx.yyyyy.zzzzz</code></p>
 <h3 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h3><p>在<code>headers</code>中通常包含了两部分: <code>token</code>类型和采用的加密算法</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"alg"</span>: <span class="string">"HS256"</span>,</div><div class="line">  <span class="attr">"typ"</span>: <span class="string">"JWT"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"alg"</span>: <span class="string">"HS256"</span>,</span><br><span class="line">  <span class="attr">"typ"</span>: <span class="string">"JWT"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>alg: 算法类型</li>
 <li>typ: token类型</li>
@@ -378,11 +354,11 @@
 <li><code>Public claims</code>: 根据需要定义自己的字段,注意应该避免冲突</li>
 <li><code>Private claims</code>: 这些是自定义的字段,可以用来在双方之间交换信息</li>
 </ul>
-<p>举个栗子:<br>  <figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="attr">"sub"</span>: <span class="string">"4008517517"</span>,</div><div class="line">  <span class="attr">"name"</span>: <span class="string">"John Doe"</span>,</div><div class="line">  <span class="attr">"admin"</span>: <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>举个栗子:<br>  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"sub"</span>: <span class="string">"4008517517"</span>,</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"John Doe"</span>,</span><br><span class="line">  <span class="attr">"admin"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h3><p>创建签名需要使用编码后的<code>headers</code>和<code>payload</code>以及一个密钥(secret),使用<code>headers</code>中制定签名进行签名算法进行签名.例如如果希望使用HMAC SHA256算法,那么签名应该使用下列方式创建:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">HMACSHA256(</div><div class="line">base64UrlEncode(header) + <span class="string">"."</span> +</div><div class="line">base64UrlEncode(payload),</div><div class="line">secret)</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HMACSHA256(</span><br><span class="line">base64UrlEncode(header) + <span class="string">"."</span> +</span><br><span class="line">base64UrlEncode(payload),</span><br><span class="line">secret)</span><br></pre></td></tr></table></figure>
 <p>签名用于验证消息的发送者以及消息是没有经过篡改的.</p>
-<h3 id="完整的JWT"><a href="#完整的JWT" class="headerlink" title="完整的JWT"></a>完整的JWT</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0Nzk0NTYxMzI5NjJ9.yWGqnRYMhdLOEHlLI3_WIpHPtX3QHEdpJQHx_B0meaA</div></pre></td></tr></table></figure>
+<h3 id="完整的JWT"><a href="#完整的JWT" class="headerlink" title="完整的JWT"></a>完整的JWT</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE0Nzk0NTYxMzI5NjJ9.yWGqnRYMhdLOEHlLI3_WIpHPtX3QHEdpJQHx_B0meaA</span><br></pre></td></tr></table></figure>
 <h2 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h2><ul>
 <li>客户端发送用户名与密码到服务器</li>
 <li>服务器进行信息核对</li>
@@ -391,9 +367,9 @@
 <li>服务器应用验证token有效性.例如:签名是否正确?token是否过期?检查token的接收方是否为自己(可选)?</li>
 <li>服务器应用返回响应的信息</li>
 </ul>
-<h2 id="node模块jwt-simple"><a href="#node模块jwt-simple" class="headerlink" title="node模块jwt-simple"></a>node模块<a href="https://github.com/hokaccha/node-jwt-simple" target="_blank" rel="external">jwt-simple</a></h2><p>使用<code>express</code>框架，<code>jwt-simple</code>模块来构建中间件（另外，我在github上边也找到<a href="https://github.com/auth0/express-jwt" target="_blank" rel="external">express-jwt</a>模块，好像也还不错的样子，但是没有实践过）。</p>
-<h3 id="产生token"><a href="#产生token" class="headerlink" title="产生token"></a>产生token</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> express <span class="keyword">from</span> <span class="string">'express'</span>;</div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> bodyParser <span class="keyword">from</span> <span class="string">'body-parser'</span>;</div><div class="line"><span class="keyword">import</span> * <span class="keyword">as</span> jwt <span class="keyword">from</span> <span class="string">'jwt-simple'</span>;</div><div class="line"></div><div class="line"><span class="keyword">let</span> app = express();</div><div class="line"></div><div class="line">app.set(<span class="string">'jwtTokenSecret'</span>, <span class="string">'phpsucks!'</span>);</div><div class="line">app.use(bodyParser.json());</div><div class="line"></div><div class="line">app.post(<span class="string">'/'</span>, (req, res) =&gt; &#123;</div><div class="line">  <span class="keyword">let</span> user = req.body;</div><div class="line">  <span class="comment">// 产生token过期时间，这里设置</span></div><div class="line">  <span class="keyword">let</span> expires = <span class="built_in">Date</span>.now() + <span class="number">7</span>*<span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>;</div><div class="line">  <span class="keyword">let</span> token = jwt.encode(&#123;</div><div class="line">    <span class="attr">iss</span>: user.id, <span class="comment">// issuer 表明请求的实体</span></div><div class="line">    exp: expires, <span class="comment">// expires token的生命周期</span></div><div class="line">    aud: <span class="string">'jser'</span></div><div class="line">  &#125;, app.get(<span class="string">'jwtTokenSecret'</span>));</div><div class="line"></div><div class="line">  res.json(&#123;</div><div class="line">    <span class="attr">token</span>: token,</div><div class="line">    <span class="attr">expires</span>: expires</div><div class="line">  &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="获取token并解析"><a href="#获取token并解析" class="headerlink" title="获取token并解析"></a>获取token并解析</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</div><div class="line">  <span class="comment">// 获取token,这里默认是放在headers的authorization</span></div><div class="line">  <span class="keyword">let</span> token = req.headers.authorization;</div><div class="line">  <span class="keyword">if</span> (token) &#123;</div><div class="line">    <span class="keyword">let</span> decoded = jwt.decode(token, app.get(<span class="string">'jwtTokenSecret'</span>));</div><div class="line">    <span class="comment">// 判断是否token已过期以及接收方是否为自己</span></div><div class="line">    <span class="keyword">if</span>(decoded.exp &lt;= <span class="built_in">Date</span>.now() || decoded.aud !== <span class="string">'jser'</span>) &#123;</div><div class="line">      res.sendStatus(<span class="number">401</span>)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      res.sendStatus(<span class="number">200</span>)</div><div class="line">    &#125;</div><div class="line">  &#125; <span class="keyword">else</span> &#123;</div><div class="line">    res.sendStatus(<span class="number">401</span>)</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="node模块jwt-simple"><a href="#node模块jwt-simple" class="headerlink" title="node模块jwt-simple"></a>node模块<a href="https://github.com/hokaccha/node-jwt-simple" target="_blank" rel="noopener">jwt-simple</a></h2><p>使用<code>express</code>框架，<code>jwt-simple</code>模块来构建中间件（另外，我在github上边也找到<a href="https://github.com/auth0/express-jwt" target="_blank" rel="noopener">express-jwt</a>模块，好像也还不错的样子，但是没有实践过）。</p>
+<h3 id="产生token"><a href="#产生token" class="headerlink" title="产生token"></a>产生token</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> express <span class="keyword">from</span> <span class="string">'express'</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> bodyParser <span class="keyword">from</span> <span class="string">'body-parser'</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> jwt <span class="keyword">from</span> <span class="string">'jwt-simple'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line"></span><br><span class="line">app.set(<span class="string">'jwtTokenSecret'</span>, <span class="string">'phpsucks!'</span>);</span><br><span class="line">app.use(bodyParser.json());</span><br><span class="line"></span><br><span class="line">app.post(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="keyword">let</span> user = req.body;</span><br><span class="line">  <span class="comment">// 产生token过期时间，这里设置</span></span><br><span class="line">  <span class="keyword">let</span> expires = <span class="built_in">Date</span>.now() + <span class="number">7</span>*<span class="number">24</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">1000</span>;</span><br><span class="line">  <span class="keyword">let</span> token = jwt.encode(&#123;</span><br><span class="line">    iss: user.id, <span class="comment">// issuer 表明请求的实体</span></span><br><span class="line">    exp: expires, <span class="comment">// expires token的生命周期</span></span><br><span class="line">    aud: <span class="string">'jser'</span></span><br><span class="line">  &#125;, app.get(<span class="string">'jwtTokenSecret'</span>));</span><br><span class="line"></span><br><span class="line">  res.json(&#123;</span><br><span class="line">    token: token,</span><br><span class="line">    expires: expires</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="获取token并解析"><a href="#获取token并解析" class="headerlink" title="获取token并解析"></a>获取token并解析</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 获取token,这里默认是放在headers的authorization</span></span><br><span class="line">  <span class="keyword">let</span> token = req.headers.authorization;</span><br><span class="line">  <span class="keyword">if</span> (token) &#123;</span><br><span class="line">    <span class="keyword">let</span> decoded = jwt.decode(token, app.get(<span class="string">'jwtTokenSecret'</span>));</span><br><span class="line">    <span class="comment">// 判断是否token已过期以及接收方是否为自己</span></span><br><span class="line">    <span class="keyword">if</span>(decoded.exp &lt;= <span class="built_in">Date</span>.now() || decoded.aud !== <span class="string">'jser'</span>) &#123;</span><br><span class="line">      res.sendStatus(<span class="number">401</span>)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      res.sendStatus(<span class="number">200</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    res.sendStatus(<span class="number">401</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p>相对于常用的session而言，JWT通过将状态的记录放置于客户端，从而降低服务端因反复查询数据库而产生的压力。这应该就是JWT的最大优点了吧！</p>
 
       
@@ -465,11 +441,9 @@
 
 
           
-  <div class="comments" id="comments">
-    
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMDI3NS82ODMw"></div>
-    
-  </div>
+
+  
+
 
 
         </div>
@@ -492,75 +466,73 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
             站点概览
           </li>
         </ul>
       
 
-      <section class="site-overview sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="classLfz" />
-          <p class="site-author-name" itemprop="name">classLfz</p>
-           
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">classLfz</p>
               <p class="site-description motion-element" itemprop="description">classlfz blog 博客 主页</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
           
+
+          
+
+          
+          
+
+          
+          
+
+          
+
         </div>
-        <nav class="site-state motion-element">
-
-          
-            <div class="site-state-item site-state-posts">
-              <a href="/archives/">
-                <span class="site-state-item-count">8</span>
-                <span class="site-state-item-name">日志</span>
-              </a>
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-categories">
-              
-                <span class="site-state-item-count">5</span>
-                <span class="site-state-item-name">分类</span>
-              
-            </div>
-          
-
-          
-            
-            
-            <div class="site-state-item site-state-tags">
-              
-                <span class="site-state-item-count">13</span>
-                <span class="site-state-item-name">标签</span>
-              
-            </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-        
-
-
       </section>
 
       
@@ -593,12 +565,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-heart"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">classLfz</span>
 
@@ -606,18 +575,17 @@
 </div>
 
 
-  <div class="powered-by">
-    由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-  </div>
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
 
   <span class="post-meta-divider">|</span>
 
-  <div class="theme-info">
-    主题 &mdash;
-    <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-      NexT.Muse
-    </a>
-  </div>
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
 
 
         
@@ -637,6 +605,8 @@
         <i class="fa fa-arrow-up"></i>
         
       </div>
+    
+
     
 
   </div>
@@ -671,45 +641,65 @@
 
 
   
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
   
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
-
-
-  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
 
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
 
 
 
@@ -734,17 +724,10 @@
 
 
   
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
-  
+
+
+
+
 
 
 
@@ -763,6 +746,9 @@
 
   
 
+  
+
+  
   
 
   
