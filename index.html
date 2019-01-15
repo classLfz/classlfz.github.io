@@ -160,7 +160,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle">但盼风雨来，能留你在此。</p>
+        <h1 class="site-subtitle" itemprop="description">但盼风雨来，能留你在此。</h1>
       
   </div>
 
@@ -237,7 +237,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="classLfz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -249,9 +249,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/03/simple-graphql/" itemprop="url">简单介绍一下GraphQL</a></h1>
+                <a class="post-title-link" href="/2018/09/03/simple-graphql/" itemprop="url">简单介绍一下GraphQL</a></h2>
         
 
         <div class="post-meta">
@@ -333,7 +333,7 @@
 
 什么是GraphQL?GraphQL（Graph Query Language）本质上就是一个http接口的设计风格，一种接口查询语言，这一点跟 restful 是一样的。但它们又有本质上的区别： restful 是面向资源的，而GraphQL则是面向全业务的。
 为什么要使用GraphQL？为了更好说明它与restful之间的区别，以及更好的说明GraphQL，下面举一个简单的例子。
-假如前端要写这样子
+假如前端要写这样子的一个页面：展示用户界面时，除了要展示用户的email,phone等信息以外，还要把用户的好友的em
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -393,7 +393,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="classLfz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -405,9 +405,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/04/mouse-region/" itemprop="url">使用js编写一个简单的web端框选功能</a></h1>
+                <a class="post-title-link" href="/2017/10/04/mouse-region/" itemprop="url">使用js编写一个简单的web端框选功能</a></h2>
         
 
         <div class="post-meta">
@@ -490,7 +490,7 @@
 
 嗯…上边的功能描述看着是挺简单的，但实现起来也还是会有些地方需要斟酌思考的。比如，如果我们的框选范围不是document.body，而是某一个div里边进行框选呢？而现实开发过程中，我们会遇上的应该就是第二种情况。
 怎么实现二话不说，咱们动手写代码吧！因为更好的兼容性，这里就避免了一些ES6的语法，如果是用的其他框架来写的话，代码上相应的也要做一些调整。
-123456789101112131415161718192021&lt;head&gt;&lt;style&gt;.fileDiv &#123;  display: inline-block;  width: 100px;  height: 
+123456789101112131415161718192021&lt;head&gt;&lt;style&gt;.fileDiv &#123;  display: inline-block;  width: 100px;  height: 100px;  margin: 24px;  background-color: blue;&#12
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -550,7 +550,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="classLfz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -562,9 +562,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/30/electron-pack/" itemprop="url">electron项目的打包</a></h1>
+                <a class="post-title-link" href="/2017/09/30/electron-pack/" itemprop="url">electron项目的打包</a></h2>
         
 
         <div class="post-meta">
@@ -645,7 +645,9 @@ electron的打包在我的开发工作中一直都是比较容易忽略但又非
 本人使用过的electron的打包工具不多，就只有两个而已：electron-packager跟electron-builder。
 electron-packagerelectron-packager最大的缺陷是它并没有提供一个类似NSIS这样子的安装包工具的集合。如果你的项目本身就不依赖安装包，或者有能力自己来编写NSIS脚本的话，这个打包工具无疑是便利的。
 
-下边的讲解有部分内容是复制于electr
+下边的讲解有部分内容是复制于electron-packager的Readme.md，需要了解更多，可以移步于此。
+
+安装12345# npm
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -705,7 +707,7 @@ electron-packagerelectron-packager最大的缺陷是它并没有提供一个类�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="classLfz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -717,9 +719,9 @@ electron-packagerelectron-packager最大的缺陷是它并没有提供一个类�
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/08/12/my-toys/" itemprop="url">玩具总动员</a></h1>
+                <a class="post-title-link" href="/2017/08/12/my-toys/" itemprop="url">玩具总动员</a></h2>
         
 
         <div class="post-meta">
@@ -800,7 +802,7 @@ electron-packagerelectron-packager最大的缺陷是它并没有提供一个类�
 mine-clearance-polymer简单说明： 这个是我刚学习polymer的时候，捣鼓出来的网页版扫雷小游戏，主要是用来熟悉一下polymer的一些特性。不过，遗憾的是，我现在虽然成功的把它放到网上了，但是似乎是因为浏览器的兼容性问题，除了chrome浏览器之外，其他浏览器…暂时还不能访问。
 
 项目代码： https://github.com/classLfz/mine-clearance-polymer
-
+点击查看例子(建议使用chrome/chromium浏览器): https://classlfz.c
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -860,7 +862,7 @@ mine-clearance-polymer简单说明： 这个是我刚学习polymer的时候，�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="classLfz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -872,9 +874,9 @@ mine-clearance-polymer简单说明： 这个是我刚学习polymer的时候，�
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/23/write-an-image-scissors/" itemprop="url">使用原生JS编写一个图片裁剪器</a></h1>
+                <a class="post-title-link" href="/2017/07/23/write-an-image-scissors/" itemprop="url">使用原生JS编写一个图片裁剪器</a></h2>
         
 
         <div class="post-meta">
@@ -963,7 +965,8 @@ mine-clearance-polymer简单说明： 这个是我刚学习polymer的时候，�
 点击裁剪按钮，对位于裁剪区的图片进行裁剪，并展示裁剪后的图片；
 
 
-HTML &amp; CSS部分首先，我们要编写
+HTML &amp; CSS部分首先，我们要编写一些基础的HTML代码：
+1234567891011121314151617181920212223
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1023,7 +1026,7 @@ HTML &amp; CSS部分首先，我们要编写
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="classLfz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1035,9 +1038,9 @@ HTML &amp; CSS部分首先，我们要编写
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/01/something-to-talk/" itemprop="url">我的博客</a></h1>
+                <a class="post-title-link" href="/2017/07/01/something-to-talk/" itemprop="url">我的博客</a></h2>
         
 
         <div class="post-meta">
@@ -1115,7 +1118,8 @@ HTML &amp; CSS部分首先，我们要编写
 另外一方面，我所在的这家公司，在伟大的兴哥哥的带领下，以前一直都是差不多一个月写一篇技术文章的习惯的。后来因为业务上的工作越来越多了，慢慢的也就淡忘了。我也只是偶尔会写一两篇记录一下最近遇到的难题的解决方法，或者记录一些自己学到/用过的技术。觉得这件事情本身就挺好的，不想荒废。
 Q：写出来的文章质量怎么样？由于本人的知识水平有限，或许会有许多错漏的地方，还望各位多多包涵，多多指正。
 Q：这里是不是只写技术类的文章？这个要看我的心情，万一哪天我矫情了呢？0.0
-Q：为什么没有评论？这个或许是暂时的，也或者是永久的。因为这段时间真的很忙，加入评论的功
+Q：为什么没有评论？这个或许是暂时的，也或者是永久的。因为这段时间真的很忙，加入评论的功能，我还需要去调研一下方案。敬请期待吧。
+Q：那我特么发现了文章的错漏，该怎么告诉你？这个就劳烦您给
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1175,7 +1179,7 @@ Q：为什么没有评论？这个或许是暂时的，也或者是永久的。�
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="classLfz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1187,9 +1191,9 @@ Q：为什么没有评论？这个或许是暂时的，也或者是永久的。�
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/04/03/do-vnp/" itemprop="url">利用digital ocean轻松翻墙</a></h1>
+                <a class="post-title-link" href="/2017/04/03/do-vnp/" itemprop="url">利用digital ocean轻松翻墙</a></h2>
         
 
         <div class="post-meta">
@@ -1276,7 +1280,7 @@ digital ocean注册账号首先到digital ocean去注册一个帐号。或者点
 
 是否添加储存选择不加存储就行了。
 
-选择机房听说是要根据你本地的网络的运营商来
+选择机房听说是要根据你本地的网络的运营商来选的？详细的还是要去网上找一下答案。不过网上也有说纽约或者三藩市的会比较好，我本人选的是三藩市的机房
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1336,7 +1340,7 @@ digital ocean注册账号首先到digital ocean去注册一个帐号。或者点
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="classLfz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1348,9 +1352,9 @@ digital ocean注册账号首先到digital ocean去注册一个帐号。或者点
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/01/15/use-apidoc-to-write-api-doc/" itemprop="url">利用apidoc在注释里写API文档</a></h1>
+                <a class="post-title-link" href="/2017/01/15/use-apidoc-to-write-api-doc/" itemprop="url">利用apidoc在注释里写API文档</a></h2>
         
 
         <div class="post-meta">
@@ -1437,7 +1441,7 @@ digital ocean注册账号首先到digital ocean去注册一个帐号。或者点
 t 模板
 
 具体的详细帮助可以通过apidoc -h查看。
-设置（apidoc.json）我们可以通过apidoc.json文件来设置项目API文档的一些内容。例如：1234567&#123;   "name": "example",   "version": "0.1.0",   "description": "
+设置（apidoc.json）我们可以通过apidoc.json文件来设置项目API文档的一些内容。例如：1234567&#123;   "name": "example",   "version": "0.1.0",   "description": "apiDoc basic example",  "title": "Custom apiDoc br
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1497,7 +1501,7 @@ t 模板
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="classLfz">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.png">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1509,9 +1513,9 @@ t 模板
 
         
         
-          <h1 class="post-title" itemprop="name headline">
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/11/26/express-jwt/" itemprop="url">express编写JWT中间件</a></h1>
+                <a class="post-title-link" href="/2016/11/26/express-jwt/" itemprop="url">express编写JWT中间件</a></h2>
         
 
         <div class="post-meta">
@@ -1601,7 +1605,12 @@ Signature签名
 
 整体结构为:xxxxx.yyyyy.zzzzz
 Headers在headers中通常包含了两部分: token类型和采用的加密算法
-1234&#123;  "alg": "HS256",  "typ": "JWT"&#
+1234&#123;  "alg": "HS256",  "typ": "JWT"&#125;
+
+alg: 算法类型
+typ: token类型
+
+PayloadToken的第二部分时负载
           ...
           <!--noindex-->
           <div class="post-button text-center">
@@ -1678,8 +1687,12 @@ Headers在headers中通常包含了两部分: token类型和采用的加密算�
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="classLfz" />
+            
               <p class="site-author-name" itemprop="name">classLfz</p>
-              <p class="site-description motion-element" itemprop="description">classlfz blog 博客 主页</p>
+              <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
           <nav class="site-state motion-element">
@@ -1748,7 +1761,7 @@ Headers在headers中通常包含了两部分: token类型和采用的加密算�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -1819,6 +1832,9 @@ Headers在headers中通常包含了两部分: token类型和采用的加密算�
 
 
 
+  
+  
+
 
 
 
@@ -1851,6 +1867,16 @@ Headers在headers中通常包含了两部分: token类型和采用的加密算�
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
   
 
 
