@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="photography," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="照片总览为了节省大家的时间，先把照片放了，如果觉得看不下去…就关了吧~          前言最近拍了一些植物，相信有些小伙伴已经看过了，毕竟拍了以后还是觉得挺好看的，忍不住要分享一下。但其实，这里边都是用我的老古董 iPhone 6S 拍的，当然，是有进行过后期的。 所以这一期的“技术文章”，咱就不聊那些瞬息万变的编程技术，而聊聊我平时无聊瞎拍的植物照片呗？ 不过，在正式开始说之前，我先在文章开">
+<meta name="keywords" content="photography">
+<meta property="og:type" content="article">
+<meta property="og:title" content="总结一下我用手机拍植物">
+<meta property="og:url" content="http://classlfz.com/2019/05/18/how-to-shoot-plants-with-your-phone/index.html">
+<meta property="og:site_name" content="classlfz的笔记本">
+<meta property="og:description" content="照片总览为了节省大家的时间，先把照片放了，如果觉得看不下去…就关了吧~          前言最近拍了一些植物，相信有些小伙伴已经看过了，毕竟拍了以后还是觉得挺好看的，忍不住要分享一下。但其实，这里边都是用我的老古董 iPhone 6S 拍的，当然，是有进行过后期的。 所以这一期的“技术文章”，咱就不聊那些瞬息万变的编程技术，而聊聊我平时无聊瞎拍的植物照片呗？ 不过，在正式开始说之前，我先在文章开">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/1.jpg">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/2.jpg">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/3.jpg">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/4.jpg">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/5.jpg">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/6.jpg">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/7.jpg">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/8.jpg">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/9.jpg">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/4.jpg">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/11.png">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/12.png">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/13.png">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/14.png">
+<meta property="og:image" content="http://classlfz.com/images/iphone-plants/15.png">
+<meta property="og:updated_time" content="2019-05-18T02:22:51.192Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="总结一下我用手机拍植物">
+<meta name="twitter:description" content="照片总览为了节省大家的时间，先把照片放了，如果觉得看不下去…就关了吧~          前言最近拍了一些植物，相信有些小伙伴已经看过了，毕竟拍了以后还是觉得挺好看的，忍不住要分享一下。但其实，这里边都是用我的老古董 iPhone 6S 拍的，当然，是有进行过后期的。 所以这一期的“技术文章”，咱就不聊那些瞬息万变的编程技术，而聊聊我平时无聊瞎拍的植物照片呗？ 不过，在正式开始说之前，我先在文章开">
+<meta name="twitter:image" content="http://classlfz.com/images/iphone-plants/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://classlfz.com/2019/05/18/how-to-shoot-plants-with-your-phone/"/>
+
+
+
+
+
+  <title>总结一下我用手机拍植物 | classlfz的笔记本</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">classlfz的笔记本</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">但盼风雨来，能留你在此。</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://classlfz.com/2019/05/18/how-to-shoot-plants-with-your-phone/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="classLfz">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="classlfz的笔记本">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">总结一下我用手机拍植物</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-18T10:22:00+08:00">
+                2019-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/摄影/" itemprop="url" rel="index">
+                    <span itemprop="name">摄影</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="照片总览"><a href="#照片总览" class="headerlink" title="照片总览"></a>照片总览</h1><p>为了节省大家的时间，先把照片放了，如果觉得看不下去…就关了吧~</p>
+<p><img src="/images/iphone-plants/1.jpg" alt="1"></p>
+<p><img src="/images/iphone-plants/2.jpg" alt="2"></p>
+<p><img src="/images/iphone-plants/3.jpg" alt="3"></p>
+<p><img src="/images/iphone-plants/4.jpg" alt="4"></p>
+<p><img src="/images/iphone-plants/5.jpg" alt="5"></p>
+<p><img src="/images/iphone-plants/6.jpg" alt="6"></p>
+<p><img src="/images/iphone-plants/7.jpg" alt="7"></p>
+<p><img src="/images/iphone-plants/8.jpg" alt="8"></p>
+<p><img src="/images/iphone-plants/9.jpg" alt="9"></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近拍了一些植物，相信有些小伙伴已经看过了，毕竟拍了以后还是觉得挺好看的，忍不住要分享一下。但其实，这里边都是用我的老古董 iPhone 6S 拍的，当然，是有进行过后期的。</p>
+<p>所以这一期的“技术文章”，咱就不聊那些瞬息万变的编程技术，而聊聊我平时无聊瞎拍的植物照片呗？</p>
+<p>不过，在正式开始说之前，我先在文章开头说一下，我其实拍的一般，后期的也一般，跟 instagram 上的大神还是有很大差距…还有就是有关于审美，我觉得还行，观众老爷你们未必觉得好看，这是每个人的审美观念不一样导致的。我只是想写下来，一个是给我的博客网站添砖加瓦（毕竟2019年都一半了，才写了一篇博客…），而是给我的爱好留下点迹象。然后，才是希望能够给同样喜欢瞎拍拍的同学一些启发。</p>
+<p>那，开始讲吧。</p>
+<h1 id="前期"><a href="#前期" class="headerlink" title="前期"></a>前期</h1><p>前期很重要，基本上是不是一张好照片，在还没有后期的时候就已经看的出来了，好的前期能让后期修图的时候异常的清晰以及舒服，甚至会让一些不喜欢捣鼓后期的同学觉得这样子就挺好的了。但你让我说前期的拍摄技巧，我这个菜鸡也说不上来什么，就是多想多拍多观察？不过我还是凑一下文章的字数吧：</p>
+<ul>
+<li><p>清楚你的手机能拍些什么：这点还是很重要的，清楚手上的工具，能让你拍起来更有自信，因为你知道能拍什么，拍不了什么，有目的地拍摄。像我的 iPhone 6s，就是有一枚2.2光圈的广角镜头，那就去拍这枚镜头能拍到的东西就好了。</p>
+</li>
+<li><p>统一的尺寸比例：可能你们留意到了，我是几乎统一了这一组照片的尺寸比例4：5的，这么做，其实是想要刻意锻炼一下我对4：5的把控能力。而且这样子也会让我更专注于内容，而不是“形式”；</p>
+</li>
+<li><p>找对比，找冲突，找线条：基本上就是找冷暖色调的对比，找戏剧冲突，找好看的线条。这个网上超多技巧，我说不过人家；</p>
+</li>
+<li><p>限定自己时间：由于我是个朝十晚六的上班族，所以上边拍的植物都是我上班路上拍的街边，路边的花花草草。由于是在上班的路上，害怕迟到的我，基本上不会在同一个场景里逗留太长的时间，这就跟考试一样，营造了一种压力感。个人感觉这能锻炼提升自己的观察力。</p>
+</li>
+</ul>
+<p>这就是我拍这一组照片的前期拍摄的感觉吧。</p>
+<h1 id="后期"><a href="#后期" class="headerlink" title="后期"></a>后期</h1><p>既然是要聊手机拍摄，那后期当然也要在手机上进行啦。手机后期软件很多，但我基本上就是用 lightroom 跟 snapseed 。调色的话，就基本上是 lightroom 了，我个人感觉，基本上，在手机调色领域，lightroom 目前是没有对手的存在，包括在 pc 端。然后一些去污点，修改图片透视啊什么的，就用上 snapseed 。当然 snapseed 也能调色，但是对比 lightroom 还是弱了点。</p>
+<p>可能有些同学不了解 lightroom，不是很明确它是干嘛用的？但是你一定听过“滤镜”，拍完照片加个“滤镜”这种事情，相信很多小伙伴都做过。那 lightroom 就是一个专门制作“滤镜”的工具，而且是专门针对这张照片制作滤镜。</p>
+<p>BB完了工具，那就再来聊聊我的后期思路。可能是逛 instagram 多了的缘故，我比较喜欢里边工业风的风格，后期偶尔也会像那个方向去修。（此处应有我经常看的皮老师？），所以照片都会偏暗色，而且某些地方我会刻意加很明显的暗角，以突出我想要突出的主体。锐度跟清晰度，也是我经常会往右调的参数，因为我感觉手机拍出来的通透感真的一般，需要让我焦内的主体跟焦外的背景有更强烈的对比，产生立体感。</p>
+<p>当然，并不是我这么调，你也要这么调，感觉自己对美的感觉来调就行了。而且，并不是每一张照片都适合这么调色。就跟不是每个人都适合烟熏妆一个道理。</p>
+<h1 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h1><p>下边就以我拍的那张“跳芭蕾舞的黄瓜藤”为例说一下：</p>
+<p><img src="/images/iphone-plants/4.jpg" alt="跳舞的黄瓜藤"></p>
+<h2 id="前期-1"><a href="#前期-1" class="headerlink" title="前期"></a>前期</h2><p>这张照片是多云的天气下，傍晚时分在公司的阳台拍的（请不要问我为什么公司的阳台会有黄瓜藤，毕竟我们还有土豆，番茄，龙眼树，榴莲树…）。当时留意到这根跳的很“欢乐”，就拍下了这张照片。</p>
+<h2 id="后期-1"><a href="#后期-1" class="headerlink" title="后期"></a>后期</h2><p><img src="/images/iphone-plants/11.png" alt="原图"></p>
+<p>原图是这样子的，个人感觉就是立体感不好，拍摄主体有点跟背景糊在一块了。</p>
+<p><img src="/images/iphone-plants/12.png" alt="12"><br><img src="/images/iphone-plants/13.png" alt="13"><br><img src="/images/iphone-plants/14.png" alt="14"><br><img src="/images/iphone-plants/15.png" alt="15"></p>
+<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>十分感谢你耐着性子看到了最后，我不是什么专业的摄影师，暂时也没有计划往那边发展，只是程序猿的日子平平淡淡，想着要拍摄自己看到的平平淡淡下边的那些耐人寻味的东西而已。</p>
+<p>不过我觉得以后我还是要多拍点人，拍自己身边的人跟事物，不管拍的怎么样。毕竟这那是瞎拍拍的真正的意义。</p>
+<p>最后的最后，我感觉我的 iPhone 6S 还能继续战斗个一两年啊！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/photography/" rel="tag"># photography</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/01/build-your-own-element/" rel="next" title="构建自己的web components">
+                <i class="fa fa-chevron-left"></i> 构建自己的web components
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="classLfz" />
+            
+              <p class="site-author-name" itemprop="name">classLfz</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#照片总览"><span class="nav-number">1.</span> <span class="nav-text">照片总览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">2.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前期"><span class="nav-number">3.</span> <span class="nav-text">前期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后期"><span class="nav-number">4.</span> <span class="nav-text">后期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#例子"><span class="nav-number">5.</span> <span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前期-1"><span class="nav-number">5.1.</span> <span class="nav-text">前期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后期-1"><span class="nav-number">5.2.</span> <span class="nav-text">后期</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后"><span class="nav-number">6.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">classLfz</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/canvas_sphere.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
