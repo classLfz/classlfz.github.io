@@ -1,337 +1,211 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <meta name="author" content="classlfz">
 
 
+    <meta name="subtitle" content="轻舟已过万重山">
 
 
+    <meta name="description" content="classlfz blog 博客 主页">
 
 
+    <meta name="keywords" content="classlfz 前端 摄影">
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>利用digital ocean轻松翻墙 | classlfz的笔记本</title>
 
 
 
+    <link rel="icon" href="/favicon.ico">
 
 
 
 
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="digital ocean,shadowsocks,vpn," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="没错，就是教你怎么翻墙，去你妹的防火墙！去你妹的审核不通过！  digital ocean注册账号首先到digital ocean去注册一个帐号。或者点击这里使用我的邀请链接进入官网注册帐号，这样子你就有$10的优惠卷。 注册的过程中，需要缴纳$5的“入会费”。网上很多教程几乎都会跟你说不要绑定信用卡，而使用paypal的缴费。点击这里进入paypal的中文网。 注册账号这里就不详说了，弄得时候">
-<meta name="keywords" content="digital ocean,shadowsocks,vpn">
-<meta property="og:type" content="article">
-<meta property="og:title" content="利用digital ocean轻松翻墙">
-<meta property="og:url" content="http://classlfz.com/2017/04/03/do-vnp/index.html">
-<meta property="og:site_name" content="classlfz的笔记本">
-<meta property="og:description" content="没错，就是教你怎么翻墙，去你妹的防火墙！去你妹的审核不通过！  digital ocean注册账号首先到digital ocean去注册一个帐号。或者点击这里使用我的邀请链接进入官网注册帐号，这样子你就有$10的优惠卷。 注册的过程中，需要缴纳$5的“入会费”。网上很多教程几乎都会跟你说不要绑定信用卡，而使用paypal的缴费。点击这里进入paypal的中文网。 注册账号这里就不详说了，弄得时候">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1626912-f97c0fff8cfea29f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1626912-82dd56f4ce7a48c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1626912-ddfc8d657540a7db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1626912-3533d673cf1895f9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1626912-824b1f0348f5d768.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1626912-64e19ae0461d9399.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1626912-54a0f96665a84f34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1626912-bfe3539e946abae9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2019-02-01T06:21:27.156Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="利用digital ocean轻松翻墙">
-<meta name="twitter:description" content="没错，就是教你怎么翻墙，去你妹的防火墙！去你妹的审核不通过！  digital ocean注册账号首先到digital ocean去注册一个帐号。或者点击这里使用我的邀请链接进入官网注册帐号，这样子你就有$10的优惠卷。 注册的过程中，需要缴纳$5的“入会费”。网上很多教程几乎都会跟你说不要绑定信用卡，而使用paypal的缴费。点击这里进入paypal的中文网。 注册账号这里就不详说了，弄得时候">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1626912-f97c0fff8cfea29f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://classlfz.com/2017/04/03/do-vnp/"/>
-
-
-
-
-
-  <title>利用digital ocean轻松翻墙 | classlfz的笔记本</title>
-  
-
-
-
-
-
-
-
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
+    <!-- stylesheets list from _config.yml -->
     
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+    <link rel="stylesheet" href="/css/style.css">
     
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">classlfz的笔记本</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <h1 class="site-subtitle" itemprop="description">但盼风雨来，能留你在此。</h1>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
 
 
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
     
 
-  
 
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://classlfz.com/2017/04/03/do-vnp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="classLfz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="classlfz的笔记本">
-    </span>
 
     
-      <header class="post-header">
-
+    
         
-        
-          <h2 class="post-title" itemprop="name headline">利用digital ocean轻松翻墙</h2>
-        
+    
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-03T13:53:00+08:00">
-                2017-04-03
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/工具类/" itemprop="url" rel="index">
-                    <span itemprop="name">工具类</span>
-                  </a>
-                </span>
-
+<meta name="generator" content="Hexo 4.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">classlfz的笔记本</a></div>
+            <div class="menu navbar-right">
                 
+                    <a class="menu-item" href="/archives">Posts</a>
                 
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
 
         </div>
-      </header>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">classlfz的笔记本</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">利用digital ocean轻松翻墙</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">classlfz</a>
+                    
 
-      
-      
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 3, 2017&nbsp;&nbsp;13:53:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
 
-      
-        <blockquote>
+        <div class="post-content">
+            <blockquote>
 <p>没错，就是教你怎么翻墙，去你妹的防火墙！去你妹的审核不通过！</p>
 </blockquote>
 <h1 id="digital-ocean注册账号"><a href="#digital-ocean注册账号" class="headerlink" title="digital ocean注册账号"></a>digital ocean注册账号</h1><p>首先到<a href="https://www.digitalocean.com/" target="_blank" rel="noopener">digital ocean</a>去注册一个帐号。或者<a href="https://m.do.co/c/1b83177d2929" target="_blank" rel="noopener">点击这里</a>使用我的邀请链接进入官网注册帐号，这样子你就有$10的优惠卷。</p>
@@ -353,431 +227,133 @@
 <h1 id="设置主机"><a href="#设置主机" class="headerlink" title="设置主机"></a>设置主机</h1><p>根据邮件的内容，我拿到我的主机的IP地址，用户名以及密码。接下来，就是连接到这台主机去设置vps或者shadowsocks（下文简称ss）了。我个人比较推荐的是ss。<br>vps是全局代理，开启了之后访问百度等国内的网站都要跑一遍三藩市，好慢…而ss就稍微智能一点。</p>
 <h2 id="连接到主机"><a href="#连接到主机" class="headerlink" title="连接到主机"></a>连接到主机</h2><p>一般来讲，使用命令行ssh到主机是比较方便的，不过digital ocean也在网页页面提供了操作界面。</p>
 <h3 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh root@xxx.xxx.xxx.xxx</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li>xxx.xxx.xxx.xxx: 主机的ip地址</li>
 </ul>
 <p>输入帐号密码（邮件里边给的）。第一次登录的时候，需要我们更换密码。</p>
 <h2 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h2><h3 id="安装ss"><a href="#安装ss" class="headerlink" title="安装ss"></a>安装ss</h3><p>安装pip</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install python-pip</span><br></pre></td></tr></table></figure>
+
 <p>安装ss</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install ss</span><br></pre></td></tr></table></figure>
-<p>如果安装过程出现一下报错（我就是…）：<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ pip install virtualenv</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"/usr/bin/pip"</span>, line 11, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    sys.exit(main())</span><br><span class="line">  File <span class="string">"/usr/lib/python3.4/site-packages/pip/__init__.py"</span>, line 215, <span class="keyword">in</span> main</span><br><span class="line">    locale.setlocale(locale.LC_ALL, <span class="string">''</span>)</span><br><span class="line">  File <span class="string">"/usr/lib64/python3.4/locale.py"</span>, line 592, <span class="keyword">in</span> setlocale</span><br><span class="line">    <span class="built_in">return</span> _setlocale(category, locale)</span><br><span class="line">locale.Error: unsupported locale setting</span><br></pre></td></tr></table></figure></p>
+
+<p>如果安装过程出现一下报错（我就是…）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ pip install virtualenv</span><br><span class="line">Traceback (most recent call last):</span><br><span class="line">  File <span class="string">"/usr/bin/pip"</span>, line 11, <span class="keyword">in</span> &lt;module&gt;</span><br><span class="line">    sys.exit(main())</span><br><span class="line">  File <span class="string">"/usr/lib/python3.4/site-packages/pip/__init__.py"</span>, line 215, <span class="keyword">in</span> main</span><br><span class="line">    locale.setlocale(locale.LC_ALL, <span class="string">''</span>)</span><br><span class="line">  File <span class="string">"/usr/lib64/python3.4/locale.py"</span>, line 592, <span class="keyword">in</span> setlocale</span><br><span class="line">    <span class="built_in">return</span> _setlocale(category, locale)</span><br><span class="line">locale.Error: unsupported locale setting</span><br></pre></td></tr></table></figure>
 <p>别慌，更新一下pip就行了</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo pip install --upgrade pip</span><br></pre></td></tr></table></figure>
+
 <h3 id="配置ss"><a href="#配置ss" class="headerlink" title="配置ss"></a>配置ss</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/ss.json//这里的json文件是自己创建的，不是系统自带</span><br></pre></td></tr></table></figure>
-<p>配置文件的内容大致如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"server"</span>:<span class="string">"服务器的ip"</span>,</span><br><span class="line">  <span class="attr">"server_port"</span>:<span class="string">"ss服务的端口"</span>,</span><br><span class="line">  <span class="attr">"local_address"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="attr">"local_port"</span>:<span class="number">1080</span>,</span><br><span class="line">  <span class="attr">"password"</span>:<span class="string">"密码"</span>,</span><br><span class="line">  <span class="attr">"timeout"</span>:<span class="number">300</span>,</span><br><span class="line">  <span class="attr">"method"</span>:<span class="string">"aes-256-cfb"</span>,</span><br><span class="line">  <span class="attr">"fast_open"</span>:<span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+<p>配置文件的内容大致如下：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"server"</span>:<span class="string">"服务器的ip"</span>,</span><br><span class="line">  <span class="attr">"server_port"</span>:<span class="string">"ss服务的端口"</span>,</span><br><span class="line">  <span class="attr">"local_address"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">  <span class="attr">"local_port"</span>:<span class="number">1080</span>,</span><br><span class="line">  <span class="attr">"password"</span>:<span class="string">"密码"</span>,</span><br><span class="line">  <span class="attr">"timeout"</span>:<span class="number">300</span>,</span><br><span class="line">  <span class="attr">"method"</span>:<span class="string">"aes-256-cfb"</span>,</span><br><span class="line">  <span class="attr">"fast_open"</span>:<span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="启动ss客户端"><a href="#启动ss客户端" class="headerlink" title="启动ss客户端"></a>启动ss客户端</h3><p>前两步很简单，可是有人就纳闷了安装好了不知道怎么用，其实可以用sslocal -help 来查看帮助就知道了</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sslocal -c /etc/ss.json</span><br></pre></td></tr></table></figure>
+
 <p>这样ss，就基本搭建完毕了。</p>
-<h3 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h3><p>设置开机启动是为了以防我们主机人为或者其他不可描述的因素而关机/宕机了，不需要再次连上去启动。<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi /etc/rc.local</span><br></pre></td></tr></table></figure></p>
+<h3 id="设置开机启动"><a href="#设置开机启动" class="headerlink" title="设置开机启动"></a>设置开机启动</h3><p>设置开机启动是为了以防我们主机人为或者其他不可描述的因素而关机/宕机了，不需要再次连上去启动。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vi /etc/rc.local</span><br></pre></td></tr></table></figure>
+
 <p>编辑<code>rc.local</code>，在末尾加上：</p>
 <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/bin/ssserver -c /etc/ss.json -d start</span><br></pre></td></tr></table></figure>
+
 <p>完成！接下来就是windows下安装shadowsocks，填写代理ip地址，账户，密码，然后启动就行了。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1626912-54a0f96665a84f34.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ss设置"></p>
 <p>什么，你用mac/linux?</p>
 <h2 id="vps"><a href="#vps" class="headerlink" title="vps"></a>vps</h2><p>这个教程挺多的，这里不说了（我真的很懒）。</p>
 <p>很多都是通过pptpd来搭建，不过如果你嫌麻烦的话，可以直接用一个<a href="https://github.com/viljoviitanen/setup-simple-pptp-vpn" target="_blank" rel="noopener">github上边写好的脚本</a>。运行一下脚本，就基本构建成功了。不过需要到设置文件里边修改一下端口跟密码。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取远程脚本文件</span></span><br><span class="line">$ wget https://raw.github.com/viljoviitanen/setup-simple-pptp-vpn/master/setup.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行脚本</span></span><br><span class="line">$ sudo sh setup.sh</span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改配置文件</span></span><br><span class="line">$ sudo vim /etc/ppp/chap-secrets</span><br></pre></td></tr></table></figure>
+
 <p>配置文件大概如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#/etc/ppp/chap-secrets</span><br><span class="line"># Secrets for authentication using CHAP</span><br><span class="line"># client server secret IP addresses</span><br><span class="line">vpn pptpd fAj-JwC-rLu *</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#&#x2F;etc&#x2F;ppp&#x2F;chap-secrets</span><br><span class="line"># Secrets for authentication using CHAP</span><br><span class="line"># client server secret IP addresses</span><br><span class="line">vpn pptpd fAj-JwC-rLu *</span><br></pre></td></tr></table></figure>
+
 <p>字段分别表示：</p>
 <ul>
 <li>client：vpn （用户名） </li>
 <li>server：pptpd（服务器类型）</li>
 <li>secret：fAj-JwC-rLu（密码）      </li>
-<li>IP addresses：<em> （</em>代表允许所有的ip链接）</li>
+<li>IP addresses：* （*代表允许所有的ip链接）</li>
 </ul>
 <p>最后重启一下pptpd服务：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ service pptpd restart</span><br></pre></td></tr></table></figure>
+
 <h3 id="客户端的设置"><a href="#客户端的设置" class="headerlink" title="客户端的设置"></a>客户端的设置</h3><p>这里就拿win10系统为例：</p>
 <p>到设置里边，选择VPN &gt; 添加VPN连接 &gt; 填写对应的信息，就可以了。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1626912-bfe3539e946abae9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="win10网络"></p>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/digital-ocean/" rel="tag"># digital ocean</a>
-          
-            <a href="/tags/shadowsocks/" rel="tag"># shadowsocks</a>
-          
-            <a href="/tags/vpn/" rel="tag"># vpn</a>
-          
         </div>
-      
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/01/15/use-apidoc-to-write-api-doc/" rel="next" title="利用apidoc在注释里写API文档">
-                <i class="fa fa-chevron-left"></i> 利用apidoc在注释里写API文档
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/07/01/something-to-talk/" rel="prev" title="我的博客">
-                我的博客 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.png"
-                alt="classLfz" />
-            
-              <p class="site-author-name" itemprop="name">classLfz</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">11</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
+            <section class="post-copyright">
                 
-                  <span class="site-state-item-count">8</span>
-                  <span class="site-state-item-name">分类</span>
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>classlfz</span>
+                    </p>
                 
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">20</span>
-                  <span class="site-state-item-name">标签</span>
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://classlfz.github.io/2017/04/03/do-vnp/">http://classlfz.github.io/2017/04/03/do-vnp/</a></span>
+                    </p>
                 
-              </div>
-            
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>去他妈的工作！</span>
+                     </p>
+                
 
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#digital-ocean注册账号"><span class="nav-number">1.</span> <span class="nav-text">digital ocean注册账号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#开启主机"><span class="nav-number">2.</span> <span class="nav-text">开启主机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#选择镜像"><span class="nav-number">2.1.</span> <span class="nav-text">选择镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择套餐"><span class="nav-number">2.2.</span> <span class="nav-text">选择套餐</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#是否添加储存"><span class="nav-number">2.3.</span> <span class="nav-text">是否添加储存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#选择机房"><span class="nav-number">2.4.</span> <span class="nav-text">选择机房</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他选项"><span class="nav-number">2.5.</span> <span class="nav-text">其他选项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#点击创建，开启主机"><span class="nav-number">2.6.</span> <span class="nav-text">点击创建，开启主机</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设置主机"><span class="nav-number">3.</span> <span class="nav-text">设置主机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接到主机"><span class="nav-number">3.1.</span> <span class="nav-text">连接到主机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#登录"><span class="nav-number">3.1.1.</span> <span class="nav-text">登录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shadowsocks"><span class="nav-number">3.2.</span> <span class="nav-text">shadowsocks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装ss"><span class="nav-number">3.2.1.</span> <span class="nav-text">安装ss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置ss"><span class="nav-number">3.2.2.</span> <span class="nav-text">配置ss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动ss客户端"><span class="nav-number">3.2.3.</span> <span class="nav-text">启动ss客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置开机启动"><span class="nav-number">3.2.4.</span> <span class="nav-text">设置开机启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vps"><span class="nav-number">3.3.</span> <span class="nav-text">vps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端的设置"><span class="nav-number">3.3.1.</span> <span class="nav-text">客户端的设置</span></a></li></ol></li></ol></li></ol></div>
-            
-
-          </div>
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/digital-ocean/"># digital ocean</a>
+                    
+                        <a href="/tags/shadowsocks/"># shadowsocks</a>
+                    
+                        <a href="/tags/vpn/"># vpn</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
         </section>
-      <!--/noindex-->
-      
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2017/07/01/something-to-talk/">我的博客</a>
+            
+            
+            <a class="next" rel="next" href="/2017/01/15/use-apidoc-to-write-api-doc/">利用apidoc在注释里写API文档</a>
+            
+        </section>
 
-      
 
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">classLfz</span>
-
-  
+    </article>
 </div>
 
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© classlfz | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
 </body>
 </html>

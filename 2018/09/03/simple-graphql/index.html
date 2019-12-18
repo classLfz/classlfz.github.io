@@ -1,332 +1,211 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <meta name="author" content="classlfz">
 
 
+    <meta name="subtitle" content="轻舟已过万重山">
 
 
+    <meta name="description" content="classlfz blog 博客 主页">
 
 
+    <meta name="keywords" content="classlfz 前端 摄影">
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>简单介绍一下GraphQL | classlfz的笔记本</title>
 
 
 
+    <link rel="icon" href="/favicon.ico">
 
 
 
 
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="nodejs,graphql,restful," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="前段时间，莫名的有好多小朋友 fork 我的博客项目，然后想起了“噢，原来我还有一个博客”啊。但是不得不说的是，fork 博客这种行为是不提倡的，面试官一眼就看出来了，年轻的小朋友们，还是要踏踏实实的学习，不要搞歪风邪气！   本文是我上周在公司的个人分享里边的一些记录，因为也确实没有在实际项目中使用过GraphQL，所以应该会有很多的不足之处，同样的，讲的也不够深入，仅供了解之用吧。  什么是">
-<meta name="keywords" content="nodejs,graphql,restful">
-<meta property="og:type" content="article">
-<meta property="og:title" content="简单介绍一下GraphQL">
-<meta property="og:url" content="http://classlfz.com/2018/09/03/simple-graphql/index.html">
-<meta property="og:site_name" content="classlfz的笔记本">
-<meta property="og:description" content="前段时间，莫名的有好多小朋友 fork 我的博客项目，然后想起了“噢，原来我还有一个博客”啊。但是不得不说的是，fork 博客这种行为是不提倡的，面试官一眼就看出来了，年轻的小朋友们，还是要踏踏实实的学习，不要搞歪风邪气！   本文是我上周在公司的个人分享里边的一些记录，因为也确实没有在实际项目中使用过GraphQL，所以应该会有很多的不足之处，同样的，讲的也不够深入，仅供了解之用吧。  什么是">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://classlfz.com/images/simple_graphql_query_postman.jpg">
-<meta property="og:image" content="http://classlfz.com/images/simple_graphql_mutation_create_postman.jpg">
-<meta property="og:image" content="http://classlfz.com/images/simple_graphql_self_inspection_postman.jpg">
-<meta property="og:updated_time" content="2019-01-11T08:47:21.399Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="简单介绍一下GraphQL">
-<meta name="twitter:description" content="前段时间，莫名的有好多小朋友 fork 我的博客项目，然后想起了“噢，原来我还有一个博客”啊。但是不得不说的是，fork 博客这种行为是不提倡的，面试官一眼就看出来了，年轻的小朋友们，还是要踏踏实实的学习，不要搞歪风邪气！   本文是我上周在公司的个人分享里边的一些记录，因为也确实没有在实际项目中使用过GraphQL，所以应该会有很多的不足之处，同样的，讲的也不够深入，仅供了解之用吧。  什么是">
-<meta name="twitter:image" content="http://classlfz.com/images/simple_graphql_query_postman.jpg">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://classlfz.com/2018/09/03/simple-graphql/"/>
-
-
-
-
-
-  <title>简单介绍一下GraphQL | classlfz的笔记本</title>
-  
-
-
-
-
-
-
-
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
+    <!-- stylesheets list from _config.yml -->
     
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+    <link rel="stylesheet" href="/css/style.css">
     
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">classlfz的笔记本</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <h1 class="site-subtitle" itemprop="description">但盼风雨来，能留你在此。</h1>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
 
 
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
     
 
-  
 
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://classlfz.com/2018/09/03/simple-graphql/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="classLfz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="classlfz的笔记本">
-    </span>
 
     
-      <header class="post-header">
-
+    
         
-        
-          <h2 class="post-title" itemprop="name headline">简单介绍一下GraphQL</h2>
-        
+    
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-03T20:02:00+08:00">
-                2018-09-03
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/技术学习/" itemprop="url" rel="index">
-                    <span itemprop="name">技术学习</span>
-                  </a>
-                </span>
-
+<meta name="generator" content="Hexo 4.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">classlfz的笔记本</a></div>
+            <div class="menu navbar-right">
                 
+                    <a class="menu-item" href="/archives">Posts</a>
                 
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
 
         </div>
-      </header>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">classlfz的笔记本</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">简单介绍一下GraphQL</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">classlfz</a>
+                    
 
-      
-      
+                    
+                        <span class="post-time">
+                        Date: <a href="#">September 3, 2018&nbsp;&nbsp;20:02:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AD%A6%E4%B9%A0/">技术学习</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
 
-      
-        <blockquote>
+        <div class="post-content">
+            <blockquote>
 <p>前段时间，莫名的有好多小朋友 <code>fork</code> 我的博客项目，然后想起了“噢，原来我还有一个博客”啊。但是不得不说的是，<code>fork</code> 博客这种行为是不提倡的，面试官一眼就看出来了，年轻的小朋友们，还是要踏踏实实的学习，不要搞歪风邪气！</p>
 </blockquote>
 <blockquote>
@@ -335,7 +214,8 @@
 <h1 id="什么是GraphQL"><a href="#什么是GraphQL" class="headerlink" title="什么是GraphQL?"></a>什么是GraphQL?</h1><p><a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>（Graph Query Language）本质上就是一个http接口的设计风格，一种接口查询语言，这一点跟 <code>restful</code> 是一样的。但它们又有本质上的区别： <code>restful</code> 是面向资源的，而<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>则是面向全业务的。</p>
 <h1 id="为什么要使用GraphQL？"><a href="#为什么要使用GraphQL？" class="headerlink" title="为什么要使用GraphQL？"></a>为什么要使用GraphQL？</h1><p>为了更好说明它与restful之间的区别，以及更好的说明<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>，下面举一个简单的例子。</p>
 <p>假如前端要写这样子的一个页面：展示用户界面时，除了要展示用户的email,phone等信息以外，还要把用户的好友的email，phone信息给展示出来。</p>
-<p>对于后端人员而已，这可能就是数据库里边的一张表的事情:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Account: &#123;</span><br><span class="line">  name: String,</span><br><span class="line">  email: String,</span><br><span class="line">  phone: String,</span><br><span class="line">  friends: [String&lt;Account-id&gt;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对于后端人员而已，这可能就是数据库里边的一张表的事情:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Account: &#123;</span><br><span class="line">  name: String,</span><br><span class="line">  email: String,</span><br><span class="line">  phone: String,</span><br><span class="line">  friends: [String&lt;Account-id&gt;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>使用 <code>restful</code> 接口，也就是暴露出来一个接口：<code>/accounts</code>来进行增删查改。</p>
 <p>但是对于前端开发人员而言，这件事可能就复杂了一些：</p>
 <ol>
@@ -355,18 +235,23 @@
 <p>而<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>就是为了解决上边这些问题而提出来的。</p>
 <p>根据官方建议，<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>的接口只有一个：method为<code>POST</code>的<code>/graphql</code>接口。其他的查询的参数就全都放置在<code>query</code>或者<code>body</code>里边了。下边举例的话，这里采用的是<code>body</code>，毕竟用 <code>restful</code> 这么多年，思维定势了…以下皆采用<code>js/node.js</code>来编写代码演示。</p>
 <h2 id="前端请求"><a href="#前端请求" class="headerlink" title="前端请求"></a>前端请求</h2><p>与 <code>restful</code> 容易造成“过载”不同的是，<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>在前端发起请求的时候，就已经把需要的字段给安排好了。像上边查询用户的例子，请求时的字段大概就是这样子：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  # 查询参数为id：&apos;123&apos;的用户信息</span><br><span class="line">  account(id: &apos;123&apos;) &#123;</span><br><span class="line">    name</span><br><span class="line">    email</span><br><span class="line">    phone</span><br><span class="line">    friends &#123;</span><br><span class="line">      name</span><br><span class="line">      email</span><br><span class="line">      phone</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  # 查询参数为id：&#39;123&#39;的用户信息</span><br><span class="line">  account(id: &#39;123&#39;) &#123;</span><br><span class="line">    name</span><br><span class="line">    email</span><br><span class="line">    phone</span><br><span class="line">    friends &#123;</span><br><span class="line">      name</span><br><span class="line">      email</span><br><span class="line">      phone</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>嗯嗯，是的，以上就是我们需要在body里边添加的内容，只需要把前端需要的字段信息填写上，就可以得到对应的字段信息进行渲染了。对比与 <code>restful</code> 的潜在的指数性爆发请求要轻松的多。</p>
 <p>而除了查询以外，我们还需要增删改的操作，同样的<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>提供了对应的操作，那就<code>mutation</code>，下边以添加一名用户为例：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mutation &#123;</span><br><span class="line">  createAccount (</span><br><span class="line">    name: &quot;lfz&quot;</span><br><span class="line">    email: &apos;classlfz@qq.com&apos;</span><br><span class="line">    phone: &apos;12345678910&apos;</span><br><span class="line">  ) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mutation &#123;</span><br><span class="line">  createAccount (</span><br><span class="line">    name: &quot;lfz&quot;</span><br><span class="line">    email: &#39;classlfz@qq.com&#39;</span><br><span class="line">    phone: &#39;12345678910&#39;</span><br><span class="line">  ) &#123;</span><br><span class="line">    name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这里我们在创建完成后，只从创建成功后的新用户里边获取<code>name</code>字段。<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>比较方便的一点就是指定你需要的字段信息，任何其他的字段信息都不应该出现的。</p>
 <h2 id="后端编写"><a href="#后端编写" class="headerlink" title="后端编写"></a>后端编写</h2><h3 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h3><p><code>Schema</code> 是 <a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a> 里边一个比较重要的概念，我这里就翻译为模式或者图表吧。这个概念应该是<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>的名称由来，在<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>里边，查询其实按照图表来进行的。而 <code>Schema</code> 则是由众多的 <code>Type</code> 来构成的。</p>
 <h3 id="Type"><a href="#Type" class="headerlink" title="Type"></a>Type</h3><p>而 <code>Type</code> 则是 <a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>里边另外一个重要的概念，它允许我们自己创建一个数据结构作为一个类型来进行查询。上边查询用户的例子，在<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>的 <code>Type</code> 来看，大概就是这样子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">type Account &#123;</span><br><span class="line">  name: String</span><br><span class="line">  email: String</span><br><span class="line">  phone: String</span><br><span class="line">  friends: [Account]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="koa-amp-koa-graphql"><a href="#koa-amp-koa-graphql" class="headerlink" title="koa &amp; koa-graphql"></a>koa &amp; koa-graphql</h3><p>我们这里就采用<a href="https://koajs.com/" target="_blank" rel="noopener"><code>koa</code></a>框架以及对应的<a href="https://github.com/chentsulin/koa-graphql" target="_blank" rel="noopener"><code>koa-graphql</code></a>库来编写<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>的服务端：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Koa <span class="keyword">from</span> <span class="string">'koa'</span></span><br><span class="line"><span class="keyword">import</span> mount <span class="keyword">from</span> <span class="string">'koa-mount'</span></span><br><span class="line"><span class="keyword">import</span> graphqlHTTP <span class="keyword">from</span> <span class="string">'koa-graphql'</span></span><br><span class="line"><span class="keyword">import</span> MyGraphqlSchema <span class="keyword">from</span> <span class="string">'./schema'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置graphql接口</span></span><br><span class="line">app.use(mount(<span class="string">'/graphql'</span>, graphqlHTTP(&#123;</span><br><span class="line">  schema: MyGraphqlSchema,</span><br><span class="line">  graphiql: <span class="literal">true</span></span><br><span class="line">&#125;)))</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">4000</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'graphQL server listen port: '</span> + <span class="number">4000</span>)</span><br></pre></td></tr></table></figure>
+
 <p>接下来，我们就需要编写 <code>schema.js</code> 来定义接口下的图表的内容：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  GraphQLObjectType,</span><br><span class="line">  GraphQLNonNull,</span><br><span class="line">  GraphQLSchema,</span><br><span class="line">  GraphQLString,</span><br><span class="line">  GraphQLList</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'graphql/type'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> accountType = <span class="keyword">new</span> GraphQLObjectType(&#123;</span><br><span class="line">  name: <span class="string">'Account'</span>,</span><br><span class="line">  description: <span class="string">'Account creator'</span>,</span><br><span class="line">  fields: <span class="function"><span class="params">()</span> =&gt;</span> (&#123;</span><br><span class="line">    name: &#123;</span><br><span class="line">      type: GraphQLString,</span><br><span class="line">      description: <span class="string">'The name of the account.'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    email: &#123;</span><br><span class="line">      type: <span class="keyword">new</span> GraphQLNonNull(GraphQLString),</span><br><span class="line">      description: <span class="string">'The email of the account.'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    phone: &#123;</span><br><span class="line">      type: <span class="keyword">new</span> GraphQLNonNull(GraphQLString),</span><br><span class="line">      description: <span class="string">'The phone of the account.'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    friends: &#123;</span><br><span class="line">      type: <span class="keyword">new</span> GraphQLList(accountType),</span><br><span class="line">      description: <span class="string">'The friends of the account, or an empty list if they have none.'</span>,</span><br><span class="line">      resolve: <span class="function">(<span class="params">obj, args, context, info</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'*** Obj: '</span>, obj)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'*** Args: '</span>, args)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'*** Context: '</span>, context)</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'*** Info: '</span>, info)</span><br><span class="line">        <span class="comment">// 假装自己又去数据库查询</span></span><br><span class="line">        <span class="keyword">return</span> [&#123;<span class="attr">id</span>: <span class="string">'234'</span>, <span class="attr">name</span>: <span class="string">'classlfz'</span>, <span class="attr">email</span>: <span class="string">'classlfz@qq.com'</span>, <span class="attr">phone</span>: <span class="string">'12345678910'</span>&#125;]</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> schema = <span class="keyword">new</span> GraphQLSchema(&#123;</span><br><span class="line">  query: <span class="keyword">new</span> GraphQLObjectType(&#123;</span><br><span class="line">    name: <span class="string">'RootQueryType'</span>,</span><br><span class="line">    fields: &#123;</span><br><span class="line">      account: &#123;</span><br><span class="line">        type: accountType,</span><br><span class="line">        args: &#123;</span><br><span class="line">          id: &#123;</span><br><span class="line">            name: <span class="string">'id'</span>,</span><br><span class="line">            type: <span class="keyword">new</span> GraphQLNonNull(GraphQLString)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        resolve: <span class="function">(<span class="params">root, args, context, info</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// console.log(root, args, context, info)</span></span><br><span class="line">          <span class="comment">// 假装自己有去数据库查询</span></span><br><span class="line">          <span class="keyword">return</span> &#123;<span class="attr">id</span>: <span class="string">'123'</span>, <span class="attr">name</span>: <span class="string">'lfz'</span>, <span class="attr">email</span>: <span class="string">'classlfz@qq.com'</span>, <span class="attr">phone</span>: <span class="string">'12345678910'</span>&#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// mutation</span></span><br><span class="line">  mutation: <span class="keyword">new</span> GraphQLObjectType(&#123;</span><br><span class="line">    name: <span class="string">'Mutation'</span>,</span><br><span class="line">    fields: &#123;</span><br><span class="line">      createAccount: &#123;</span><br><span class="line">        type: accountType,</span><br><span class="line">        args: &#123;</span><br><span class="line">          name: &#123;</span><br><span class="line">            name: <span class="string">'name'</span>,</span><br><span class="line">            type: GraphQLString</span><br><span class="line">          &#125;,</span><br><span class="line">          email: &#123;</span><br><span class="line">            name: <span class="string">'email'</span>,</span><br><span class="line">            type: GraphQLString</span><br><span class="line">          &#125;,</span><br><span class="line">          phone: &#123;</span><br><span class="line">            name: <span class="string">'phone'</span>,</span><br><span class="line">            type: GraphQLString</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        resolve: <span class="function">(<span class="params">obj, &#123;name&#125;, source, info</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="comment">// 假装自己有去数据库添加</span></span><br><span class="line">          <span class="keyword">return</span> &#123;<span class="attr">name</span>: <span class="string">'lfz'</span>, <span class="attr">email</span>: <span class="string">'classlfz@qq.com'</span>, <span class="attr">phone</span>: <span class="string">'12345678910'</span>, <span class="attr">friends</span>: []&#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> schema</span><br></pre></td></tr></table></figure>
+
 <p>就这样，我们完成了一个简单的使用node.js编写的<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>服务了。接下来，我们开启这个服务，再使用前端人员熟悉的 <code>postman</code> 工具来查看一下结果是如何的：</p>
 <h3 id="查询用户信息"><a href="#查询用户信息" class="headerlink" title="查询用户信息"></a>查询用户信息</h3><p><img src="/images/simple_graphql_query_postman.jpg" alt="查询"></p>
 <h3 id="创建用户信息"><a href="#创建用户信息" class="headerlink" title="创建用户信息"></a>创建用户信息</h3><p><img src="/images/simple_graphql_mutation_create_postman.jpg" alt="创建用户"></p>
@@ -374,6 +259,7 @@
 <h3 id="自检"><a href="#自检" class="headerlink" title="自检"></a>自检</h3><p><img src="/images/simple_graphql_self_inspection_postman.jpg" alt="自检"></p>
 <p>下边演示一下，使用node的一个库graphdoc来生成接口文档</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ graphdoc -e http://localhost:4000/graphql -o ./doc/schema</span><br></pre></td></tr></table></figure>
+
 <p>这样，我们就在本地<code>./doc/schema</code>得到了一个<code>html</code>接口文档了~非常的方便。</p>
 <h1 id="为什么还不火？"><a href="#为什么还不火？" class="headerlink" title="为什么还不火？"></a>为什么还不火？</h1><p>上边说了那么多的<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>好的地方，那么为什么<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>没有火起来呢？不火总是有原因的嘛，优择略汰，下边这里罗列一些大家普遍认为的<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>不足的地方：</p>
 <ol>
@@ -386,391 +272,78 @@
 </ol>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总的来说，还是要以辨证的态度来看待这项技术吧。<a href="https://graphql.org/" target="_blank" rel="noopener"><code>GraphQL</code></a>固然解决了 <code>restful</code> 的一些痛点，但有不可避免的引发了另外一些问题。但是比作其他的技术一样，只有最合适，没有最完美。</p>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/nodejs/" rel="tag"># nodejs</a>
-          
-            <a href="/tags/graphql/" rel="tag"># graphql</a>
-          
-            <a href="/tags/restful/" rel="tag"># restful</a>
-          
         </div>
-      
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2017/10/04/mouse-region/" rel="next" title="使用js编写一个简单的web端框选功能">
-                <i class="fa fa-chevron-left"></i> 使用js编写一个简单的web端框选功能
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/01/build-your-own-element/" rel="prev" title="构建自己的web components">
-                构建自己的web components <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.png"
-                alt="classLfz" />
-            
-              <p class="site-author-name" itemprop="name">classLfz</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">11</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
+            <section class="post-copyright">
                 
-                  <span class="site-state-item-count">8</span>
-                  <span class="site-state-item-name">分类</span>
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>classlfz</span>
+                    </p>
                 
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">20</span>
-                  <span class="site-state-item-name">标签</span>
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://classlfz.github.io/2018/09/03/simple-graphql/">http://classlfz.github.io/2018/09/03/simple-graphql/</a></span>
+                    </p>
                 
-              </div>
-            
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>去他妈的工作！</span>
+                     </p>
+                
 
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是GraphQL"><span class="nav-number">1.</span> <span class="nav-text">什么是GraphQL?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要使用GraphQL？"><span class="nav-number">2.</span> <span class="nav-text">为什么要使用GraphQL？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#前端请求"><span class="nav-number">2.1.</span> <span class="nav-text">前端请求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#后端编写"><span class="nav-number">2.2.</span> <span class="nav-text">后端编写</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Schema"><span class="nav-number">2.2.1.</span> <span class="nav-text">Schema</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Type"><span class="nav-number">2.2.2.</span> <span class="nav-text">Type</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#koa-amp-koa-graphql"><span class="nav-number">2.2.3.</span> <span class="nav-text">koa &amp; koa-graphql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询用户信息"><span class="nav-number">2.2.4.</span> <span class="nav-text">查询用户信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建用户信息"><span class="nav-number">2.2.5.</span> <span class="nav-text">创建用户信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自检性"><span class="nav-number">2.3.</span> <span class="nav-text">自检性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#自检"><span class="nav-number">2.3.1.</span> <span class="nav-text">自检</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么还不火？"><span class="nav-number">3.</span> <span class="nav-text">为什么还不火？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
-            
-
-          </div>
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/nodejs/"># nodejs</a>
+                    
+                        <a href="/tags/graphql/"># graphql</a>
+                    
+                        <a href="/tags/restful/"># restful</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
         </section>
-      <!--/noindex-->
-      
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/02/01/build-your-own-element/">构建自己的web components</a>
+            
+            
+            <a class="next" rel="next" href="/2017/10/04/mouse-region/">使用js编写一个简单的web端框选功能</a>
+            
+        </section>
 
-      
 
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">classLfz</span>
-
-  
+    </article>
 </div>
 
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© classlfz | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
 </body>
 </html>

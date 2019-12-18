@@ -1,328 +1,211 @@
 <!DOCTYPE html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="zh-Hans">
+<html lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <meta name="author" content="classlfz">
 
 
+    <meta name="subtitle" content="轻舟已过万重山">
 
 
+    <meta name="description" content="classlfz blog 博客 主页">
 
 
+    <meta name="keywords" content="classlfz 前端 摄影">
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<title>构建自己的web components | classlfz的笔记本</title>
 
 
 
+    <link rel="icon" href="/favicon.ico">
 
 
 
 
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="web components,javascript,custom element,lit-element," />
-
-
-
-
-
-
-
-
-
-
-<meta name="description" content="前面先吹一下牛逼“自定义组件”，“组件化”渐渐成了前端编程的日常，我们把具有通用功能的东西提取出来，然后封装一个“组件”，方便重复使用，而不用再重复写这段逻辑以及样式。 只是问题是，每一个框架都有自己的一套规则写法，用 react 编写一个组件，无法在 vue，angular里边使用，反之亦然。这多么的让人不爽，如果我之前在使用 react 的一个项目里边写了一个组件，然后到了一个 vue 的项目">
-<meta name="keywords" content="web components,javascript,custom element,lit-element">
-<meta property="og:type" content="article">
-<meta property="og:title" content="构建自己的web components">
-<meta property="og:url" content="http://classlfz.com/2019/02/01/build-your-own-element/index.html">
-<meta property="og:site_name" content="classlfz的笔记本">
-<meta property="og:description" content="前面先吹一下牛逼“自定义组件”，“组件化”渐渐成了前端编程的日常，我们把具有通用功能的东西提取出来，然后封装一个“组件”，方便重复使用，而不用再重复写这段逻辑以及样式。 只是问题是，每一个框架都有自己的一套规则写法，用 react 编写一个组件，无法在 vue，angular里边使用，反之亦然。这多么的让人不爽，如果我之前在使用 react 的一个项目里边写了一个组件，然后到了一个 vue 的项目">
-<meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-16T13:42:27.546Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="构建自己的web components">
-<meta name="twitter:description" content="前面先吹一下牛逼“自定义组件”，“组件化”渐渐成了前端编程的日常，我们把具有通用功能的东西提取出来，然后封装一个“组件”，方便重复使用，而不用再重复写这段逻辑以及样式。 只是问题是，每一个框架都有自己的一套规则写法，用 react 编写一个组件，无法在 vue，angular里边使用，反之亦然。这多么的让人不爽，如果我之前在使用 react 的一个项目里边写了一个组件，然后到了一个 vue 的项目">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://classlfz.com/2019/02/01/build-your-own-element/"/>
-
-
-
-
-
-  <title>构建自己的web components | classlfz的笔记本</title>
-  
-
-
-
-
-
-
-
-
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
-
-  
-  
+    <!-- stylesheets list from _config.yml -->
     
-  
-
-  <div class="container sidebar-position-left page-post-detail">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+    <link rel="stylesheet" href="/css/style.css">
     
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">classlfz的笔记本</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-      
-        <h1 class="site-subtitle" itemprop="description">但盼风雨来，能留你在此。</h1>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
 
 
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
     
 
-  
 
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://classlfz.com/2019/02/01/build-your-own-element/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="classLfz">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="classlfz的笔记本">
-    </span>
 
     
-      <header class="post-header">
-
+    
         
-        
-          <h2 class="post-title" itemprop="name headline">构建自己的web components</h2>
-        
+    
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-01T14:43:00+08:00">
-                2019-02-01
-              </time>
-            
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端/" itemprop="url" rel="index">
-                    <span itemprop="name">前端</span>
-                  </a>
-                </span>
-
+<meta name="generator" content="Hexo 4.1.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">classlfz的笔记本</a></div>
+            <div class="menu navbar-right">
                 
+                    <a class="menu-item" href="/archives">Posts</a>
                 
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
 
         </div>
-      </header>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">classlfz的笔记本</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/category">Categories</a>
+                
+                    <a class="menu-item" href="/tag">Tags</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
     
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">构建自己的web components</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">classlfz</a>
+                    
 
-      
-      
+                    
+                        <span class="post-time">
+                        Date: <a href="#">February 1, 2019&nbsp;&nbsp;14:43:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E5%89%8D%E7%AB%AF/">前端</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
 
-      
-        <h1 id="前面先吹一下牛逼"><a href="#前面先吹一下牛逼" class="headerlink" title="前面先吹一下牛逼"></a>前面先吹一下牛逼</h1><p>“自定义组件”，“组件化”渐渐成了前端编程的日常，我们把具有通用功能的东西提取出来，然后封装一个“组件”，方便重复使用，而不用再重复写这段逻辑以及样式。</p>
+        <div class="post-content">
+            <h1 id="前面先吹一下牛逼"><a href="#前面先吹一下牛逼" class="headerlink" title="前面先吹一下牛逼"></a>前面先吹一下牛逼</h1><p>“自定义组件”，“组件化”渐渐成了前端编程的日常，我们把具有通用功能的东西提取出来，然后封装一个“组件”，方便重复使用，而不用再重复写这段逻辑以及样式。</p>
 <p>只是问题是，每一个框架都有自己的一套规则写法，用 <code>react</code> 编写一个组件，无法在 <code>vue</code>，<code>angular</code>里边使用，反之亦然。这多么的让人不爽，如果我之前在使用 <code>react</code> 的一个项目里边写了一个组件，然后到了一个 <code>vue</code> 的项目里边遇到类似的组件，不能直接套用，而是要按照 <code>vue</code> 的规则来重写一个？（当然，事实上，一般一些常用的组件，每个框架都会有对应的写好的组件）</p>
 <p>当然不是，我们今天介绍一下使用<code>web components</code>相关的技术来构建一个通用的组件库吧！</p>
 <p><a href="https://stackblitz.com/edit/my-button-web-components" target="_blank" rel="noopener">完整代码在这里！</a></p>
@@ -331,407 +214,98 @@
 <p>在这里，我并不打算多讲技术的细节，毕竟文档里边写的很清楚，如果大家感兴趣的话，关于技术细节的部分，<a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components" target="_blank" rel="noopener">点击这里</a>去沉浸到技术的海洋去吧！</p>
 <p>下边，我将定义一个名为 <code>my-button</code> 的具有 <code>type</code> 属性的组件，该组件会根据 <code>type</code> 属性的值，呈现不同的样式。</p>
 <h2 id="基础定义版本"><a href="#基础定义版本" class="headerlink" title="基础定义版本"></a>基础定义版本</h2><p>先利用 <code>Custom element</code>以及 <code>ShadowDOM</code> 编写，其实web components比较重要的两个技术要点就是 <code>customElements.define()</code> 以及 <code>shadow dom</code>。<code>shadow dom</code>带给我们的主要好处是，它为我们的组件创建了一个密封的空间，里边的html，css样式是完完全全隔离的，不会影响到外界。而这也是一些框架，css库在这方面所有的努力，不同的是，<code>shadow dom</code>是天然具备这种的条件的。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButtonCreate</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构建html结构</span></span><br><span class="line">    <span class="keyword">let</span> shadow = <span class="keyword">this</span>.attachShadow(&#123;<span class="attr">mode</span>: <span class="string">'open'</span>&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    style.textContent = <span class="string">`</span></span><br><span class="line"><span class="string">      :host[hidden] &#123;</span></span><br><span class="line"><span class="string">        display: none;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      :host &#123;</span></span><br><span class="line"><span class="string">        display: inline-block;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      button &#123;</span></span><br><span class="line"><span class="string">        padding: 8px;</span></span><br><span class="line"><span class="string">        border-radius: 4px;</span></span><br><span class="line"><span class="string">        color: black;</span></span><br><span class="line"><span class="string">        outline: none;</span></span><br><span class="line"><span class="string">        border: none;</span></span><br><span class="line"><span class="string">        font-size: 16px;</span></span><br><span class="line"><span class="string">        cursor: pointer;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      .primary-type &#123;</span></span><br><span class="line"><span class="string">        background-color: blue;</span></span><br><span class="line"><span class="string">        color: white;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      .danger-type &#123;</span></span><br><span class="line"><span class="string">        background-color: red;</span></span><br><span class="line"><span class="string">        color: white;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      .success-type &#123;</span></span><br><span class="line"><span class="string">        background-color: green;</span></span><br><span class="line"><span class="string">        color: white;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> button = <span class="built_in">document</span>.createElement(<span class="string">'button'</span>);</span><br><span class="line">    <span class="keyword">let</span> slot = <span class="built_in">document</span>.createElement(<span class="string">'slot'</span>);</span><br><span class="line"></span><br><span class="line">    button.appendChild(slot);</span><br><span class="line">    shadow.appendChild(style);</span><br><span class="line">    shadow.appendChild(button);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 映射properties与attributes</span></span><br><span class="line">  get type() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getAttribute(<span class="string">'type'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  set type(newVal) &#123;</span><br><span class="line">    <span class="keyword">this</span>.setAttribute(<span class="string">'type'</span>, newVal);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 监测attributes变化</span></span><br><span class="line">  <span class="keyword">static</span> get observedAttributes() &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">'type'</span>];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// attributes变化回调函数</span></span><br><span class="line">  attributeChangedCallback(name, oldValue, newValue) &#123;</span><br><span class="line">    <span class="keyword">if</span> (name === <span class="string">'type'</span>) &#123;</span><br><span class="line">      updateStyle(<span class="keyword">this</span>, newValue);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateStyle</span> (<span class="params">elem, newType</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> shadow = elem.shadowRoot;</span><br><span class="line">  <span class="keyword">let</span> btn = shadow.querySelector(<span class="string">'button'</span>);</span><br><span class="line">  btn.classList.remove(<span class="string">'primary-type'</span>);</span><br><span class="line">  btn.classList.remove(<span class="string">'danger-type'</span>);</span><br><span class="line">  <span class="keyword">if</span> (newType) &#123;</span><br><span class="line">    btn.classList.add(<span class="string">`<span class="subst">$&#123;newType&#125;</span>-type`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">'my-button-create'</span>, MyButtonCreate);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButtonCreate</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 构建html结构</span></span><br><span class="line">    <span class="keyword">let</span> shadow = <span class="keyword">this</span>.attachShadow(&#123;<span class="attr">mode</span>: <span class="string">'open'</span>&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> style = <span class="built_in">document</span>.createElement(<span class="string">'style'</span>);</span><br><span class="line">    style.textContent = <span class="string">`</span></span><br><span class="line"><span class="string">      :host[hidden] &#123;</span></span><br><span class="line"><span class="string">        display: none;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      :host &#123;</span></span><br><span class="line"><span class="string">        display: inline-block;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      button &#123;</span></span><br><span class="line"><span class="string">        padding: 8px;</span></span><br><span class="line"><span class="string">        border-radius: 4px;</span></span><br><span class="line"><span class="string">        color: black;</span></span><br><span class="line"><span class="string">        outline: none;</span></span><br><span class="line"><span class="string">        border: none;</span></span><br><span class="line"><span class="string">        font-size: 16px;</span></span><br><span class="line"><span class="string">        cursor: pointer;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      .primary-type &#123;</span></span><br><span class="line"><span class="string">        background-color: blue;</span></span><br><span class="line"><span class="string">        color: white;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      .danger-type &#123;</span></span><br><span class="line"><span class="string">        background-color: red;</span></span><br><span class="line"><span class="string">        color: white;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">      .success-type &#123;</span></span><br><span class="line"><span class="string">        background-color: green;</span></span><br><span class="line"><span class="string">        color: white;</span></span><br><span class="line"><span class="string">      &#125;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> button = <span class="built_in">document</span>.createElement(<span class="string">'button'</span>);</span><br><span class="line">    <span class="keyword">let</span> slot = <span class="built_in">document</span>.createElement(<span class="string">'slot'</span>);</span><br><span class="line"></span><br><span class="line">    button.appendChild(slot);</span><br><span class="line">    shadow.appendChild(style);</span><br><span class="line">    shadow.appendChild(button);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 映射properties与attributes</span></span><br><span class="line">  <span class="keyword">get</span> type() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getAttribute(<span class="string">'type'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span> type(newVal) &#123;</span><br><span class="line">    <span class="keyword">this</span>.setAttribute(<span class="string">'type'</span>, newVal);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 监测attributes变化</span></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">get</span> observedAttributes() &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">'type'</span>];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// attributes变化回调函数</span></span><br><span class="line">  attributeChangedCallback(name, oldValue, newValue) &#123;</span><br><span class="line">    <span class="keyword">if</span> (name === <span class="string">'type'</span>) &#123;</span><br><span class="line">      updateStyle(<span class="keyword">this</span>, newValue);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateStyle</span> (<span class="params">elem, newType</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> shadow = elem.shadowRoot;</span><br><span class="line">  <span class="keyword">let</span> btn = shadow.querySelector(<span class="string">'button'</span>);</span><br><span class="line">  btn.classList.remove(<span class="string">'primary-type'</span>);</span><br><span class="line">  btn.classList.remove(<span class="string">'danger-type'</span>);</span><br><span class="line">  <span class="keyword">if</span> (newType) &#123;</span><br><span class="line">    btn.classList.add(<span class="string">`<span class="subst">$&#123;newType&#125;</span>-type`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">'my-button-create'</span>, MyButtonCreate);</span><br></pre></td></tr></table></figure>
+
 <p>我们可以感受到，这里几乎就是纯js操作dom，写起来并不是特殊友好舒服，为此标准给我们提供了一个稍微友好一点的写法。</p>
 <h2 id="模板定义版"><a href="#模板定义版" class="headerlink" title="模板定义版"></a>模板定义版</h2><p>模板定义写起来其实跟前边的很像，只是在构建html模板的时候，使用<code>template</code>标签来编写html模板，会更舒服一些：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButtonTemplate</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取index.html里边的template模板，挂载到shadow dom下</span></span><br><span class="line">    <span class="keyword">let</span> template = <span class="built_in">document</span>.getElementById(<span class="string">'my-button-template'</span>).content;</span><br><span class="line">    <span class="keyword">this</span>.attachShadow(&#123;<span class="attr">mode</span>: <span class="string">'open'</span>&#125;).appendChild(template.cloneNode(<span class="literal">true</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// properties与attributes映射</span></span><br><span class="line">  get type() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getAttribute(<span class="string">'type'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  set type(newVal) &#123;</span><br><span class="line">    <span class="keyword">this</span>.setAttribute(<span class="string">'type'</span>, newVal);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 监测attributes变化</span></span><br><span class="line">  <span class="keyword">static</span> get observedAttributes() &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">'type'</span>];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// attributes变化回调函数</span></span><br><span class="line">  attributeChangedCallback(name, oldValue, newValue) &#123;</span><br><span class="line">    <span class="keyword">if</span> (name === <span class="string">'type'</span>) &#123;</span><br><span class="line">      updateStyle(<span class="keyword">this</span>, newValue);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateStyle</span> (<span class="params">elem, newType</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> shadow = elem.shadowRoot;</span><br><span class="line">  <span class="keyword">let</span> btn = shadow.querySelector(<span class="string">'button'</span>);</span><br><span class="line">  btn.classList.remove(<span class="string">'primary-type'</span>);</span><br><span class="line">  btn.classList.remove(<span class="string">'danger-type'</span>);</span><br><span class="line">  <span class="keyword">if</span> (newType) &#123;</span><br><span class="line">    btn.classList.add(<span class="string">`<span class="subst">$&#123;newType&#125;</span>-type`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">'my-button-template'</span>, MyButtonTemplate);</span><br></pre></td></tr></table></figure>
-<h2 id="使用lit-element"><a href="#使用lit-element" class="headerlink" title="使用lit-element"></a>使用lit-element</h2><p>其实只要细想一下，标准之下给的方法其实都不是很适合完成一些复杂类型的web components的构建。在条件渲染，列表渲染方面的表现其实还是差强人意。我在这里推荐的是伴随着<a href="mailto:`polymer@3.x" target="_blank" rel="noopener">`polymer@3.x</a><code>推出的</code>lit-element<code>，它本身就是</code>polymer<code>里边的核心代码，去掉了</code>polymer<code>的内置web components（像</code>DomIf<code>,</code>DomRepeat<code>），让它变得更小巧，当然，如果你更喜欢</code>polymer<code>的语法，而且不在乎这点容量问题，我个人其实是更推荐</code>polymer<code>的。不过，除了</code>lit-element<code>跟</code>polymer`，还有很多编写 web components 的库，个人感觉或许都会在写一个复杂的组件的时候给与一定程序的编写帮助。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButtonTemplate</span> <span class="keyword">extends</span> <span class="title">HTMLElement</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取index.html里边的template模板，挂载到shadow dom下</span></span><br><span class="line">    <span class="keyword">let</span> template = <span class="built_in">document</span>.getElementById(<span class="string">'my-button-template'</span>).content;</span><br><span class="line">    <span class="keyword">this</span>.attachShadow(&#123;<span class="attr">mode</span>: <span class="string">'open'</span>&#125;).appendChild(template.cloneNode(<span class="literal">true</span>));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// properties与attributes映射</span></span><br><span class="line">  <span class="keyword">get</span> type() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.getAttribute(<span class="string">'type'</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">set</span> type(newVal) &#123;</span><br><span class="line">    <span class="keyword">this</span>.setAttribute(<span class="string">'type'</span>, newVal);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 监测attributes变化</span></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">get</span> observedAttributes() &#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">'type'</span>];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// attributes变化回调函数</span></span><br><span class="line">  attributeChangedCallback(name, oldValue, newValue) &#123;</span><br><span class="line">    <span class="keyword">if</span> (name === <span class="string">'type'</span>) &#123;</span><br><span class="line">      updateStyle(<span class="keyword">this</span>, newValue);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateStyle</span> (<span class="params">elem, newType</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> shadow = elem.shadowRoot;</span><br><span class="line">  <span class="keyword">let</span> btn = shadow.querySelector(<span class="string">'button'</span>);</span><br><span class="line">  btn.classList.remove(<span class="string">'primary-type'</span>);</span><br><span class="line">  btn.classList.remove(<span class="string">'danger-type'</span>);</span><br><span class="line">  <span class="keyword">if</span> (newType) &#123;</span><br><span class="line">    btn.classList.add(<span class="string">`<span class="subst">$&#123;newType&#125;</span>-type`</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">'my-button-template'</span>, MyButtonTemplate);</span><br></pre></td></tr></table></figure>
+
+<h2 id="使用lit-element"><a href="#使用lit-element" class="headerlink" title="使用lit-element"></a>使用lit-element</h2><p>其实只要细想一下，标准之下给的方法其实都不是很适合完成一些复杂类型的web components的构建。在条件渲染，列表渲染方面的表现其实还是差强人意。我在这里推荐的是伴随着<code>polymer@3.x</code>推出的<code>lit-element</code>，它本身就是<code>polymer</code>里边的核心代码，去掉了<code>polymer</code>的内置web components（像<code>DomIf</code>,<code>DomRepeat</code>），让它变得更小巧，当然，如果你更喜欢<code>polymer</code>的语法，而且不在乎这点容量问题，我个人其实是更推荐<code>polymer</code>的。不过，除了<code>lit-element</code>跟<code>polymer</code>，还有很多编写 web components 的库，个人感觉或许都会在写一个复杂的组件的时候给与一定程序的编写帮助。</p>
 <p>下边，上代码：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; LitElement, html &#125; <span class="keyword">from</span> <span class="string">'lit-element'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButtonLit</span> <span class="keyword">extends</span> <span class="title">LitElement</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 设置properties，以及对attributes的映射关系</span></span><br><span class="line">  <span class="keyword">static</span> get properties() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      type: &#123; <span class="attr">type</span>: <span class="built_in">String</span>, <span class="attr">reflect</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">this</span>._btnClass = <span class="string">''</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// attributes变化回调函数</span></span><br><span class="line">  attributeChangedCallback(name, oldval, newval) &#123;</span><br><span class="line">    <span class="keyword">if</span> (name === <span class="string">'type'</span>) <span class="keyword">this</span>._btnClass = <span class="string">`<span class="subst">$&#123;newval&#125;</span>-type`</span>;</span><br><span class="line">    <span class="keyword">this</span>.dispatchEvent(<span class="keyword">new</span> CustomEvent(<span class="string">'attr-changed'</span>, &#123;</span><br><span class="line">      detail: <span class="string">'test'</span>,</span><br><span class="line">      bubbles: <span class="literal">true</span></span><br><span class="line">    &#125;));</span><br><span class="line">    <span class="keyword">super</span>.attributeChangedCallback(name, oldval, newval);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构建html结构</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> html<span class="string">`</span></span><br><span class="line"><span class="string">      &lt;style&gt;</span></span><br><span class="line"><span class="string">        :host[hidden] &#123;</span></span><br><span class="line"><span class="string">          display: none;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        :host &#123;</span></span><br><span class="line"><span class="string">          display: inline-block;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        button &#123;</span></span><br><span class="line"><span class="string">          padding: 8px;</span></span><br><span class="line"><span class="string">          border-radius: 4px;</span></span><br><span class="line"><span class="string">          color: black;</span></span><br><span class="line"><span class="string">          outline: none;</span></span><br><span class="line"><span class="string">          border: none;</span></span><br><span class="line"><span class="string">          font-size: 16px;</span></span><br><span class="line"><span class="string">          cursor: pointer;</span></span><br><span class="line"><span class="string">          background-color: gray;</span></span><br><span class="line"><span class="string">          color: white;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        .primary-type &#123;</span></span><br><span class="line"><span class="string">          background-color: blue;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        .danger-type &#123;</span></span><br><span class="line"><span class="string">          background-color: red;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        .success-type &#123;</span></span><br><span class="line"><span class="string">          background-color: green;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">      &lt;/style&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">      &lt;button class="<span class="subst">$&#123;<span class="keyword">this</span>._btnClass&#125;</span>"&gt;</span></span><br><span class="line"><span class="string">        <span class="subst">$&#123;<span class="keyword">this</span>.type === <span class="string">'primary'</span> ?</span></span></span><br><span class="line"><span class="string"><span class="subst">          html<span class="string">`&lt;span&gt;primary&lt;/span&gt;`</span>:</span></span></span><br><span class="line"><span class="string"><span class="subst">          html<span class="string">`&lt;span&gt;others&lt;/span&gt;`</span>&#125;</span></span></span><br><span class="line"><span class="string">        &lt;slot&gt;&lt;/slot&gt;</span></span><br><span class="line"><span class="string">      &lt;/button&gt;</span></span><br><span class="line"><span class="string">    `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">'my-button-lit'</span>, MyButtonLit);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; LitElement, html &#125; <span class="keyword">from</span> <span class="string">'lit-element'</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyButtonLit</span> <span class="keyword">extends</span> <span class="title">LitElement</span> </span>&#123;</span><br><span class="line">  <span class="comment">// 设置properties，以及对attributes的映射关系</span></span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">get</span> properties() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      type: &#123; <span class="attr">type</span>: <span class="built_in">String</span>, <span class="attr">reflect</span>: <span class="literal">true</span> &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">this</span>._btnClass = <span class="string">''</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// attributes变化回调函数</span></span><br><span class="line">  attributeChangedCallback(name, oldval, newval) &#123;</span><br><span class="line">    <span class="keyword">if</span> (name === <span class="string">'type'</span>) <span class="keyword">this</span>._btnClass = <span class="string">`<span class="subst">$&#123;newval&#125;</span>-type`</span>;</span><br><span class="line">    <span class="keyword">this</span>.dispatchEvent(<span class="keyword">new</span> CustomEvent(<span class="string">'attr-changed'</span>, &#123;</span><br><span class="line">      detail: <span class="string">'test'</span>,</span><br><span class="line">      bubbles: <span class="literal">true</span></span><br><span class="line">    &#125;));</span><br><span class="line">    <span class="keyword">super</span>.attributeChangedCallback(name, oldval, newval);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 构建html结构</span></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> html`</span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">style</span>&gt;</span></span></span><br><span class="line"><span class="xml">        :host[hidden] &#123;</span></span><br><span class="line"><span class="xml">          display: none;</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">        :host &#123;</span></span><br><span class="line"><span class="xml">          display: inline-block;</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">        button &#123;</span></span><br><span class="line"><span class="xml">          padding: 8px;</span></span><br><span class="line"><span class="xml">          border-radius: 4px;</span></span><br><span class="line"><span class="xml">          color: black;</span></span><br><span class="line"><span class="xml">          outline: none;</span></span><br><span class="line"><span class="xml">          border: none;</span></span><br><span class="line"><span class="xml">          font-size: 16px;</span></span><br><span class="line"><span class="xml">          cursor: pointer;</span></span><br><span class="line"><span class="xml">          background-color: gray;</span></span><br><span class="line"><span class="xml">          color: white;</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">        .primary-type &#123;</span></span><br><span class="line"><span class="xml">          background-color: blue;</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">        .danger-type &#123;</span></span><br><span class="line"><span class="xml">          background-color: red;</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">        .success-type &#123;</span></span><br><span class="line"><span class="xml">          background-color: green;</span></span><br><span class="line"><span class="xml">        &#125;</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"</span></span></span><span class="subst">$&#123;<span class="keyword">this</span>._btnClass&#125;</span><span class="xml"><span class="tag"><span class="string">"</span>&gt;</span></span></span><br><span class="line"><span class="xml">        </span><span class="subst">$&#123;<span class="keyword">this</span>.type === <span class="string">'primary'</span> ?</span></span><br><span class="line"><span class="subst">          html`<span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>primary<span class="tag">&lt;/<span class="name">span</span>&gt;</span>`</span>:</span></span><br><span class="line"><span class="subst">          html`<span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span>others<span class="tag">&lt;/<span class="name">span</span>&gt;</span>`</span>&#125;</span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">slot</span>&gt;</span><span class="tag">&lt;/<span class="name">slot</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">    `</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">customElements.define(<span class="string">'my-button-lit'</span>, MyButtonLit);</span><br></pre></td></tr></table></figure>
+
 <p>总体上来讲，<code>lit-element</code> 是在自定义properties以及构建html模板上做了一个封装，提供了更方便的定义 properties 的方式，以及properties映射 attributes的方式，而html模板则让我们以字符串模板的形式来编写，能更好编写，以及封装我们的组件，具有更好的灵活性。</p>
 <h2 id="使用写好的web-components"><a href="#使用写好的web-components" class="headerlink" title="使用写好的web-components"></a>使用写好的web-components</h2><p>因为上边编写好的组件，都是符合现代浏览器标准的，所以在现代浏览器上，我们都可以非常方便的直接将他们导入，然后使用就可以了。当然，在一些脱节奏的浏览器上（例如IE11，Edge），我们可以通过加入 <code>polyfill</code> 来正常使用我们编写好的组件。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-button-create</span> <span class="attr">type</span>=<span class="string">"primary"</span>&gt;</span>create<span class="tag">&lt;/<span class="name">my-button-create</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-button-template</span> <span class="attr">type</span>=<span class="string">"danger"</span>&gt;</span>template<span class="tag">&lt;/<span class="name">my-button-template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">my-button-lit</span> <span class="attr">type</span>=<span class="string">"success"</span>&gt;</span>Lit element<span class="tag">&lt;/<span class="name">my-button-lit</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
 <h2 id="项目经验"><a href="#项目经验" class="headerlink" title="项目经验"></a>项目经验</h2><p>可能在这个react,vue,angular等框架横行的时代，对于新生的web components多多少少会存有疑惑以及担忧，这货真能构建大型项目吗？其实这个倒是真的不用担心，毕竟大名鼎鼎的YouTube就是用web components构建的。而且，就算不用web components构建大型项目，在组件库的构建上边，它肯定能给你带来以前无法带来愉悦。</p>
 <p>那么问题来了，jQuery不是也有很多组件库吗？（手动滑稽）</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>其实，web components还存在着许多的不足之处，进步空间还非常的大，但是它确实是迈出了重要的一步，我觉得它肯定是会在一定程度上影响着前端技术的发展方向。还有就是，标准总是在一些革命性的库/框架的影响下做出改进更新，这对双方都是好事，而最终受益的，始终都是我们开发者。所以，我觉得多多少少可以拥抱一下web components了，毕竟这都9102年了。</p>
 
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/web-components/" rel="tag"># web components</a>
-          
-            <a href="/tags/javascript/" rel="tag"># javascript</a>
-          
-            <a href="/tags/custom-element/" rel="tag"># custom element</a>
-          
-            <a href="/tags/lit-element/" rel="tag"># lit-element</a>
-          
         </div>
-      
 
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/09/03/simple-graphql/" rel="next" title="简单介绍一下GraphQL">
-                <i class="fa fa-chevron-left"></i> 简单介绍一下GraphQL
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/18/how-to-shoot-plants-with-your-phone/" rel="prev" title="总结一下我用手机拍植物（多图预警，流量警告）">
-                总结一下我用手机拍植物（多图预警，流量警告） <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-
-  
-
-
-
-        </div>
         
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview-wrap sidebar-panel">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/images/avatar.png"
-                alt="classLfz" />
-            
-              <p class="site-author-name" itemprop="name">classLfz</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">11</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-categories">
+            <section class="post-copyright">
                 
-                  <span class="site-state-item-count">8</span>
-                  <span class="site-state-item-name">分类</span>
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>classlfz</span>
+                    </p>
                 
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">20</span>
-                  <span class="site-state-item-name">标签</span>
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://classlfz.github.io/2019/02/01/build-your-own-element/">http://classlfz.github.io/2019/02/01/build-your-own-element/</a></span>
+                    </p>
                 
-              </div>
-            
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>去他妈的工作！</span>
+                     </p>
+                
 
-          </nav>
-
-          
-
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前面先吹一下牛逼"><span class="nav-number">1.</span> <span class="nav-text">前面先吹一下牛逼</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#web-components"><span class="nav-number">2.</span> <span class="nav-text">web components</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础定义版本"><span class="nav-number">2.1.</span> <span class="nav-text">基础定义版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模板定义版"><span class="nav-number">2.2.</span> <span class="nav-text">模板定义版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用lit-element"><span class="nav-number">2.3.</span> <span class="nav-text">使用lit-element</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用写好的web-components"><span class="nav-number">2.4.</span> <span class="nav-text">使用写好的web-components</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#项目经验"><span class="nav-number">2.5.</span> <span class="nav-text">项目经验</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
-            
-
-          </div>
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/web-components/"># web components</a>
+                    
+                        <a href="/tags/javascript/"># javascript</a>
+                    
+                        <a href="/tags/custom-element/"># custom element</a>
+                    
+                        <a href="/tags/lit-element/"># lit-element</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
         </section>
-      <!--/noindex-->
-      
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2019/05/18/how-to-shoot-plants-with-your-phone/">总结一下我用手机拍植物（多图预警，流量警告）</a>
+            
+            
+            <a class="next" rel="next" href="/2018/09/03/simple-graphql/">简单介绍一下GraphQL</a>
+            
+        </section>
 
-      
 
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">classLfz</span>
-
-  
+    </article>
 </div>
 
-
-  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
-
-
-
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
-</script>
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© classlfz | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
 </body>
 </html>
