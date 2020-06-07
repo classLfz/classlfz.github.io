@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="classLfz">
+
+
+    <meta name="subtitle" content="天凉好个秋">
+
+
+    <meta name="description" content="classlfz blog 博客 主页">
+
+
+    <meta name="keywords" content="classlfz blog">
+
+
+<title>flv.js直播流的实时性实践 | classlfz的笔记本</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">classlfz的笔记本</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">classlfz的笔记本</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">flv.js直播流的实时性实践</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">classLfz</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">June 7, 2020&nbsp;&nbsp;15:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/js/">js</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>慢慢改，你就知道怎么改了。</p>
+</blockquote>
+<h2 id="尽量用几句话说完版本"><a href="#尽量用几句话说完版本" class="headerlink" title="尽量用几句话说完版本"></a>尽量用几句话说完版本</h2><ul>
+<li><p>其实<code>flv.js</code>做的事情仅仅只是将flv的视频流格式转换成<code>html5</code>的<code>video</code>标签所能识别的数据源，更多的还是依赖<code>video</code>标签原生的<code>API</code>来进行优化;</p>
+</li>
+<li><p><code>videoElement.buffered.end(0)</code> 获取到<code>video</code>标签的缓存长度, <code>videElement.currentTime</code> 获取当前播放的相对时间，两者的差就是缓存与播放点的延迟；</p>
+</li>
+<li><p>如果上边两者的差大于某数值，就进行直接跳转到快要接近 <code>videoElement.buffered.end(0)</code>；</p>
+</li>
+<li><p>视频在追帧的整个过程中，存在着一个动态的播放速度，通过 <code>videoElement.playbackRate</code> 来进行修改；</p>
+</li>
+<li><p>播放速度的调节是为了尽量让 <code>videoElement.buffered.end(0) - videoElement.currentTime</code> 稳定在某一个范围内；</p>
+</li>
+</ul>
+<h2 id="flv-js做了什么"><a href="#flv-js做了什么" class="headerlink" title="flv.js做了什么"></a>flv.js做了什么</h2><p>我在优化这个直播流的过程中，最开始犯的错误就是把 <code>flv.js</code> 看成是一个播放器了，然后在 <code>flv.js</code> 身上寻找跳帧，加/减速播放等等接口，但其实 <code>flv.js</code> 做的事情特别的专一，就是把 <code>flv</code> 视频流转换成 <code>video</code> 标签所能识别的数据源进行播放。</p>
+<p>明白了这一点，接上来的事情就好办了许多，既然 <code>video</code> 标签才是我们操作的目标，那直接去查 <code>video</code> 的<code>API</code>，看看我们都能做些什么就好了。这里说一下，MDN的文档在<code>video</code>的接口上似乎不是很全，有些属性跟接口并没有统一放置到<code>video</code>标签的说明页面，所以需要使用搜索引擎来找比较好。</p>
+<h2 id="跳帧"><a href="#跳帧" class="headerlink" title="跳帧"></a>跳帧</h2><p>既然是直播，实时性应该都是我们的第一追求？但是如果服务器端给到的数据缓存比较大（实时性比较落后），那么缓存下来的第一帧往往都是比较滞后，所以这个时候我选择了跳帧，直接跳到一个接近缓存尾部的时间进行播放。这里不能直接跳到最后一帧，理由很明显，会出现卡顿。当然，也可以修改视频的播放速度进行追赶，但是会有些鬼畜的感觉。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> end = videoElement.buffered.end(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">const</span> current = videoElement.currentTime</span><br><span class="line"><span class="keyword">const</span> diff = end - current</span><br><span class="line"><span class="keyword">if</span> (diff &gt; <span class="number">4</span>) &#123; <span class="comment">// 这里设定了超过4秒以上就进行跳帧</span></span><br><span class="line">  videoElement.currentTime = end - <span class="number">0.45</span> <span class="comment">// 这里不跳到end，是因为如果buffer的增长速度相对较快的时候，会出现频繁追帧而导致明显的卡顿</span></span><br><span class="line">  <span class="keyword">if</span> (videoElement.paused) flvPlayer.play()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但并不是跳了帧时候就完事了，因为在页面刷新后或者初始化后，<code>video</code>标签的缓存增长速度是会比平时要快的，如果你上边设置跳帧的时间间隔比较短，而<code>buffer</code>的增长速度又相对较快，这个时候就会出现明显的卡顿，因为会陷入到一个持续跳帧的状态，直到缓存的增长速度降了下来。</p>
+<p>为了解决这个问题，我采取的策略是修改播放速度进行追帧。</p>
+<h2 id="追帧"><a href="#追帧" class="headerlink" title="追帧"></a>追帧</h2><p>修改播放速度进行追帧的明显的好处就是可以避免频繁跳帧所带来的频繁卡顿。而播放速度的修改最好也是一个动态的值，需要依据<code>video</code>标签当前<code>buffer</code>的大小，<code>currentTime</code>，以及<code>buffer</code>的增长速度（如果能实时知道的话）来动态地修改这个播放速度的值是比较理想的。</p>
+<p>这里追帧的宗旨是为了让 <code>videoElement.buffered.end(0) - videoElement.currentTime</code> 维持在一个比较稳定的范围内，而这个范围，就是除去网络延迟后，缓存跟当前播放内容之间的延迟了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 定时追帧</span></span><br><span class="line">  <span class="keyword">const</span> end = videoElement.buffered.end(<span class="number">0</span>)</span><br><span class="line">  <span class="keyword">const</span> current = videoElement.currentTime</span><br><span class="line">  <span class="keyword">const</span> diff = end - current</span><br><span class="line">  <span class="keyword">const</span> diffCritical = <span class="number">4</span> <span class="comment">// 这里设定了超过4秒以上就进行跳转</span></span><br><span class="line">  <span class="keyword">const</span> diffSpeedUp = <span class="number">1</span> <span class="comment">// 这里设置了超过1秒以上则进行视频加速播放</span></span><br><span class="line">  <span class="keyword">const</span> maxPlaybackRate = <span class="number">4</span> <span class="comment">// 自定义设置允许的最大播放速度</span></span><br><span class="line">  <span class="keyword">let</span> playbackRate = <span class="number">1.0</span> <span class="comment">// 播放速度</span></span><br><span class="line">  <span class="keyword">if</span> (diff &gt; diffCritical) &#123;</span><br><span class="line">    videoElement.currentTime = end - <span class="number">0.45</span></span><br><span class="line">    playbackRate = <span class="built_in">Math</span>.max(<span class="number">1</span>, <span class="built_in">Math</span>.min(diffCritical, <span class="number">16</span>))</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (diff &gt; diffSpeedUp) &#123;</span><br><span class="line">    playbackRate = <span class="built_in">Math</span>.max(<span class="number">1</span>, <span class="built_in">Math</span>.min(diff, maxPlaybackRate, <span class="number">16</span>))</span><br><span class="line">  &#125;</span><br><span class="line">  videoElement.playbackRate = playbackRate</span><br><span class="line">  <span class="keyword">if</span> (videoElement.paused) flvPlayer.play()</span><br><span class="line">&#125;, <span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上边所举的接口跟例子应该还可以继续优化，比如声音的加入可能会让事情变得更复杂，跳帧跟追帧的标准可以再动态化一点，这应该就意味着需要更多的参数单元加入到这场直播盛宴当中来。</p>
+<p>最后，希望你也能享受到慢慢地让一件事情变得更好所带来的乐趣。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>classLfz</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://yoursite.com/2020/06/07/flvjs-live/">http://yoursite.com/2020/06/07/flvjs-live/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>你快乐吗？</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/flv-js/"># flv.js</a>
+                    
+                        <a href="/tags/html5/"># html5</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2019/05/18/how-to-shoot-plants-with-your-phone/">总结一下我用手机拍植物（多图预警，流量警告）</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© classLfz | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
