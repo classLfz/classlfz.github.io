@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="classLfz">
+
+
+    <meta name="subtitle" content="天凉好个秋">
+
+
+    <meta name="description" content="classlfz blog 博客 主页">
+
+
+    <meta name="keywords" content="classlfz blog">
+
+
+<title>微信小程序自动化测试实践 | classlfz的笔记本</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">classlfz的笔记本</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">classlfz的笔记本</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">微信小程序自动化测试实践</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">classLfz</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">August 8, 2020&nbsp;&nbsp;10:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/js/">js</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>小程序自动化 SDK 为开发者提供了一套通过外部脚本操控小程序的方案，从而实现小程序自动化测试的目的。<br>如果你之前使用过 Selenium WebDriver 或者 Puppeteer，那你可以很容易快速上手。小程序自动化 SDK 与它们的工作原理是类似的，主要区别在于控制对象由浏览器换成了小程序。</p>
+</blockquote>
+<h2 id="说在前面"><a href="#说在前面" class="headerlink" title="说在前面"></a>说在前面</h2><p>关于小程序自动化的一些接口方面的内容，本文都不细究，感兴趣的同学可以到 <a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/auto/" target="_blank" rel="noopener">官方文档</a> 进行查看。本文主要阐述的是我在利用这套方案进行小程序开发的自动化测试的一些使用感受跟遇到的问题，以及采用的解决方案。</p>
+<h2 id="为什么需要自动化测试？"><a href="#为什么需要自动化测试？" class="headerlink" title="为什么需要自动化测试？"></a>为什么需要自动化测试？</h2><p>当然是为了装…</p>
+<p>主要是担心以后业务变复杂，以及一些小改动会让之前的逻辑失效的可能性，一些常规的测试可以用自动化测试来减少一些时间成本的开销。</p>
+<p>当然，有些操作（如模拟用户授权登录）微信开发工具的自动化似乎并不全？部分我想要的模拟的效果并没有达成。</p>
+<h2 id="测试框架的选择"><a href="#测试框架的选择" class="headerlink" title="测试框架的选择"></a>测试框架的选择</h2><p>这里就使用了官方文档推荐的 <code>jest</code> ，当然我感觉如果你有自己熟悉，喜欢的js测试框架，也是可以替代的。因为本质上就是通过js代码调用微信开发工具的接口获取信息进行对比而已。</p>
+<h2 id="cli-HTTP"><a href="#cli-HTTP" class="headerlink" title="cli/HTTP"></a>cli/HTTP</h2><p>这两个选择哪个，可能还是看个人喜好。我这里是选择了cli。</p>
+<p>打开微信开发工具后，设置 &gt; 安全设置 &gt; 开启服务端口。开启了服务端口以后，官方的 <code>miniprogram-automator</code> 才能够正常的运作起来。</p>
+<p>这个需要注意的是 <code>cli</code> 的路径，如果微信开发工具是默认安装的话，那么实例化 <code>miniprogram-automator</code> 的时候，<code>cliPath</code> 的路径是不需要改动的，如果不是默认安装路径，那么把安装目录下的找到对应的路径修改上去。</p>
+<p>但是如果项目是多人协同，不同成员的安装路径可能不一样。我能想到的有两个方案：</p>
+<ul>
+<li><p>建立一个初始化 <code>miniprogram-automator</code> 的文件，里边通过 <code>process.argv</code> 获取测试命令里的 <code>cliPath</code> ，对 <code>cliPath</code> 参数的修改；</p>
+</li>
+<li><p>建立一个初始化 <code>miniprogram-automator</code> 的文件跟一个本地配置文件，实例化时通过获取本地配置文件里的 <code>cliPath</code> ，对 <code>cliPath</code> 参数的修改；</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> automator = <span class="built_in">require</span>(<span class="string">'miniprogram-automator'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 配置文件方案</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">cliPath</span>: cliPathConf &#125; = <span class="built_in">require</span>(<span class="string">'/path/to/configs'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> miniProgram</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> getMiniprogram = <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (miniProgram) <span class="keyword">return</span> miniProgram</span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    argv</span><br><span class="line">  &#125; = process</span><br><span class="line">  <span class="comment">// 读取配置文件cli路径</span></span><br><span class="line">  <span class="keyword">let</span> cliPath = cliPathConf</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 读取命令cli路径</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">2</span>; i &lt; argv.length; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> argStr = argv[i]</span><br><span class="line">    <span class="keyword">if</span> (argStr &amp;&amp; <span class="regexp">/^--cliPath=/</span>.test(argStr)) &#123;</span><br><span class="line">      cliPath = argStr.replace(<span class="regexp">/^--cliPath=/</span>, <span class="string">''</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> launchOptions = cliPath ? &#123;</span><br><span class="line">    cliPath,</span><br><span class="line">    projectPath: process.cwd()</span><br><span class="line">  &#125; : &#123;</span><br><span class="line">    projectPath: process.cwd()</span><br><span class="line">  &#125;</span><br><span class="line">  miniProgram = <span class="keyword">await</span> automator.launch(launchOptions)</span><br><span class="line">  <span class="keyword">const</span> page = <span class="keyword">await</span> miniProgram.currentPage()</span><br><span class="line">  <span class="keyword">await</span> page.waitFor(<span class="number">1500</span>)</span><br><span class="line">  <span class="keyword">return</span> miniProgram</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  getMiniprogram</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样如果不是默认安装路径的成员在运行测试命令时，就可以通过传递 <code>cliPath</code> 来对其进行实例话修改：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run <span class="built_in">test</span> --cliPath=/path/to/cli</span><br></pre></td></tr></table></figure>
+
+<h2 id="测试代码"><a href="#测试代码" class="headerlink" title="测试代码"></a>测试代码</h2><p>列一下我遇到的一些需要注意的点：</p>
+<ul>
+<li><p>一般来说，我会比较倾向于将不同的测试代码分在不同的测试文件，但因为我还没有找到不在每个测试文件执行前都关闭开发工具的方法，所以写起来的时候尽量将同类型的测试安排在一个文件（避免多次重启开发工具，减少测试时长），然后通过不同的测试执行函数进行区分，如 <code>jest</code> 的 <code>test/it</code> 函数；</p>
+</li>
+<li><p>页面的渲染是需要时间的，在一些需要等待渲染的地方需要执行 <code>currentPage.waitFor()</code> 函数进行页面渲染等待。至于这个等待时间可按情况而定，但需要安排一个合理的时间，渲染时间过长也是不合理的；</p>
+</li>
+<li><p>执行了模拟函数 <code>miniprogram.mockWxMethod</code>，需要在合理的地方执行对应的 <code>miniprogram.restoreWxMethod</code> 及时进行恢复。</p>
+</li>
+</ul>
+<h2 id="改进我的脚本"><a href="#改进我的脚本" class="headerlink" title="改进我的脚本"></a>改进我的脚本</h2><p>这部分内容跟测试无关，但是因为前面接触到 <code>cli</code> 这个工具，发现它可以控制开发工具的一些基本操作，于是利用它对项目的脚本进行一定的改造。</p>
+<p>首先，我们对 <code>cli</code> 工具进行一个全局的别名命名：</p>
+<h3 id="macos"><a href="#macos" class="headerlink" title="macos"></a>macos</h3><p>建一个 <code>.bashrc</code> 文件在项目根目录下，内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /bash/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># wxcli</span></span><br><span class="line"><span class="keyword">function</span> <span class="function"><span class="title">wxcli</span></span>() &#123;</span><br><span class="line">    /Applications/wechatwebdevtools.app/Contents/MacOS/cli <span class="variable">$@</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">export</span> -f wxcli</span><br></pre></td></tr></table></figure>
+
+<p>npm运行脚本:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"build-npm"</span>: <span class="string">"source ./.bashrc &amp;&amp; wxcli build-npm --project $&#123;PWD&#125;"</span>,</span><br><span class="line">    <span class="attr">"open-project"</span>: <span class="string">"source ~/.bashrc &amp;&amp; wxcli open --project $&#123;PWD&#125; &amp;&amp; sleep 5 &amp;&amp; npm run build-npm"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样子，我们就实现了运行 <code>npm run open-project</code> 打开项目，然后就可以直接开始开发调试了。类似的功能可以参考 <a href="">cli文档</a> 发挥想象。</p>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>暂时还没实践过，所以这里就不说了。网上找到了一个类似于 Linux 下的 <code>alias wxcli=/path/to/cli</code> 命令 <code>docskey wxcli=/path/to/cli</code> 或许可以实现类似的功能。</p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>classLfz</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://yoursite.com/2020/08/08/wx-miniprogram-auto-test/">http://yoursite.com/2020/08/08/wx-miniprogram-auto-test/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>你快乐吗？</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/jest/"># jest</a>
+                    
+                        <a href="/tags/wechatdevtool/"># wechatdevtool</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/06/07/flvjs-live/">flv.js直播流的前端实时性实践</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© classLfz | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
