@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="classLfz">
+
+
+    <meta name="subtitle" content="天凉好个秋">
+
+
+    <meta name="description" content="classlfz blog 博客 主页">
+
+
+    <meta name="keywords" content="classlfz blog">
+
+
+<title>如何利用树莓派控制红外遥控设备 | classlfz的笔记本</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+<body>
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">classlfz的笔记本</a></div>
+            <div class="menu navbar-right">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">classlfz的笔记本</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">&#9776; Menu</div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                    <a class="menu-item" href="/archives">Posts</a>
+                
+                    <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if(toggleMenu.classList.contains("active")){
+           toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        }else{
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+        <div class="main">
+            <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    document.ready(
+        function () {
+            tocbot.init({
+                tocSelector: '.tocbot-list',
+                contentSelector: '.post-content',
+                headingSelector: 'h1, h2, h3, h4, h5',
+                collapseDepth: 1,
+                orderedList: false,
+                scrollSmooth: true,
+            })
+        }
+    )
+
+    function expand_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 6,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "collapse_toc()");
+        b.innerHTML = "Collapse all"
+    }
+
+    function collapse_toc() {
+        var b = document.querySelector(".tocbot-toc-expand");
+        tocbot.init({
+            tocSelector: '.tocbot-list',
+            contentSelector: '.post-content',
+            headingSelector: 'h1, h2, h3, h4, h5',
+            collapseDepth: 1,
+            orderedList: false,
+            scrollSmooth: true,
+        });
+        b.setAttribute("onclick", "expand_toc()");
+        b.innerHTML = "Expand all"
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">如何利用树莓派控制红外遥控设备</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">classLfz</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">April 4, 2021&nbsp;&nbsp;0:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/IoT/">IoT</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>本文的主要实践方式参考了 <a href="https://segmentfault.com/a/1190000014135418" target="_blank" rel="noopener">树莓派学习手记——制作一个空调遥控器（红外接收、发射的实现）</a>，大部分内容都是直接参考，我会添加一些我遇到的坑以及需要注意的地方。</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>前些日子，我发现广州的炎炎夏日已经开始到来了，但是房间里边的老空调的脾性又很特别，因为年代久远，它声音特别的响，而且控温也控制的不是特别好，还没有定时功能（后边发现其实是有的，只是我的那个万能遥控的问题… :-(）。</p>
+<p>除此之外，我还想着如果能远程操作它，我下班回到就能享受阵阵清爽，岂不美哉？</p>
+<p>然后，我就开始了我有些曲折的捣鼓之路…</p>
+<h1 id="整体的思路"><a href="#整体的思路" class="headerlink" title="整体的思路"></a>整体的思路</h1><p>整体的思路其实是很清晰明了的，就是收集遥控的信号，把它们一个个的记录下来，然后在需要的时候发送出去就好了。</p>
+<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>以下是我准备的硬件设备，如果你手头上未必有这些，或者版本不一样，可能会行不通，当然，原理我觉得应该是可以互通的。</p>
+<ul>
+<li>树莓派3B</li>
+<li>红外发送管（参考型号TSAL6200）</li>
+<li>红外接收管（参考型号HS0038B）</li>
+<li>红外遥控器（只要是能控制你的设备的遥控器都行，像带红外遥控的手机）</li>
+</ul>
+<h2 id="走过的歪路"><a href="#走过的歪路" class="headerlink" title="走过的歪路"></a>走过的歪路</h2><p>这里说一下我走过的歪路，因为不太懂电路这一块，所以，刚开始让我直接去对接红外接收/发送管的时候，我的内心是拒接的，你不能让我接我就接，毕竟我是真不懂…但后来发现这个才是正确的。</p>
+<p>然后，我在挑选电子元器件的某宝店铺上发现了一个模块，它是自带NEC协议编码的，发送跟接收管都带上了，还带有一个芯片去转发编码。当时的我就在想，这个东西好啊，我只要学会了这个协议跟通信方式不就好了？硬件不会，软件上我还勉强可以学一下嘛！</p>
+<p>结果买回来发现自己交了智商税…不是说这个模块不能用，只是在跟空调的对接上，它并不起作用，反而是我找了一个电视的遥控来测试，它有反应，就很气。</p>
+<h1 id="硬件链接"><a href="#硬件链接" class="headerlink" title="硬件链接"></a>硬件链接</h1><p>这里我也没有接上电阻（我同学跟我说，最好接一下，哈哈），也没接三极管进行信号放大。需要的同学，可以到上边提及的参考文中查看。反正下边这个图我也是从那里拿的 :-&gt;。</p>
+<p><img src="/images/raspberrypi-lirc.jpeg" alt="电路连接"></p>
+<h1 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h1><p>主要用到的软件其实就只有一个 <code>lirc</code>。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 更新</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt update</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 安装</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt install lirc</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>修改系统配置文件，开放红外接口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo vi /boot/config.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>找到 <code>infrared module</code> 部分，去除注释，17改18，18改17</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Uncomment this to enable infrared communication.</span><br><span class="line">dtoverlay&#x3D;gpio-ir,gpio_pin&#x3D;18</span><br><span class="line">dtoverlay&#x3D;gpio-ir-tx,gpio_pin&#x3D;17</span><br></pre></td></tr></table></figure>
+
+<p>调试时，我的系统内核是 <code>Linux version 5.4.51-v7+ (dom@buildbot) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611))</code>，是有效的。</p>
+<p>按照参考文章而言，不同的内核可能会有一些差异，需要你自行搜索关键词 <code>lirc lirc-rpi gpio-ir</code> 查阅相关资料解决。</p>
+<h2 id="修改驱动配置"><a href="#修改驱动配置" class="headerlink" title="修改驱动配置"></a>修改驱动配置</h2><p>这里跟参考文章略有不同，原文修改的是文件 <code>/etc/lirc/lirc_options.conf</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo vi /etc/lirc/lirc_options.conf</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 把：</span><br><span class="line">driver &#x3D; devinput</span><br><span class="line">device &#x3D; auto</span><br><span class="line"></span><br><span class="line"># 修改为：</span><br><span class="line">driver &#x3D; default</span><br><span class="line">device &#x3D; &#x2F;dev&#x2F;lirc1</span><br></pre></td></tr></table></figure>
+
+<p>但我使用的版本 <code>lircd 0.9.0-pre1</code> 却并不存在这个文件，找了一轮下来，发现不同的版本略有不同，我修改的内容是:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo vi /etc/lirc/hardware.conf</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 修改一下内容</span><br><span class="line"># Arguments which will be used when launching lircd</span><br><span class="line">LIRCD_ARGS&#x3D;&quot;--uinput --listen&quot;</span><br><span class="line"></span><br><span class="line">DRIVER&#x3D;&quot;default&quot;</span><br><span class="line"></span><br><span class="line"># usually &#x2F;dev&#x2F;lirc0 is the correct setting for systems using udev</span><br><span class="line">DEVICE&#x3D;&quot;&#x2F;dev&#x2F;lirc0&quot;</span><br></pre></td></tr></table></figure>
+
+<p>重启lirc</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo /etc/init.d/lirc stop</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo /etc/init.d/lirc start</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="测试红外接收是否正常"><a href="#测试红外接收是否正常" class="headerlink" title="测试红外接收是否正常"></a>测试红外接收是否正常</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mode2 -d &#x2F;dev&#x2F;lirc1</span><br></pre></td></tr></table></figure>
+
+<p>使用遥控器对准红外接收管随意按下按钮，如果屏幕上出现一些格式如下的输出则表示接收功能正常：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">space 2640</span><br><span class="line">pulse 820</span><br><span class="line">space 2667</span><br><span class="line">pulse 845</span><br><span class="line">space 895</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h1 id="录入红外信号"><a href="#录入红外信号" class="headerlink" title="录入红外信号"></a>录入红外信号</h1><p>这部分内容我建议你可以先按照我上边提及的参考文章来一遍，因为如果能够那样子完成的话，是一件很方便的事情，但是对于我而言，那样子并不生效。原因可能是我使用的lirc的版本问题，也有可能是我目前接触到的设备的问题，并不能按照原文那样子直接生成配置文件。</p>
+<p>我采用的方式，是使用 <code>mode2</code> 工具，将遥控的红外信号一个一个的采集下来，存放到一个文件进行观察。</p>
+<p><strong>这里需要注意，采集信号的时候应该尽量避免干扰，像发送管的pin口跟接收管pin口接近，会产生干扰信号，所以需要在录入时，先拔掉发送管的线，再进行录入。</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mode2 -m -d /dev/lirc1 &gt; ~/device.lircd.conf</span></span><br></pre></td></tr></table></figure>
+
+<p>如果一切正常，我们将在 <code>device.lircd.conf</code> 文件内采集到一些这样子的内容：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">7795305</span><br><span class="line"></span><br><span class="line">  3478569-space</span><br><span class="line"></span><br><span class="line">       40    21745-pulse  2001748-space</span><br><span class="line"></span><br><span class="line">  1975060-space</span><br><span class="line"></span><br><span class="line">     3432     3543      841      896      845      919</span><br><span class="line">      821      894      845     2668      820      898</span><br><span class="line">      842      895      845     2643      845      897</span><br><span class="line">      ......</span><br><span class="line">      # 如果这中间包含一些 xxx-space yyy-pluse 的信息，那么这次采集很有可能就是失败的</span><br><span class="line">      # 记住，请尽量在采集时避免周围的信号干扰，多试几次</span><br><span class="line">      796     2693      795      945      794     2692</span><br><span class="line">      794     2694      793      945      794      945</span><br><span class="line">      796      944      820     2667      795     2696</span><br><span class="line">      792      944      821     2667      819     2668</span><br><span class="line">      794      945      796      945     3444     3537</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果存在信号干扰，这组数字当中（从1975060-space开始到结束），则会混杂一些带有<code>-space</code>/<code>-pulse</code>这类的干扰信息，这是有问题的，按照下边的执行将其重新发送出去极有可能达不到预期效果。</strong></p>
+<p>接下来我们将采集到的信号按照以下格式存放至lirc的配置文件 <code>/etc/lirc/lircd.conf</code> 里边：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 最好先备份以下原文件</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo cp /etc/lirc/lircd.conf.b</span></span><br><span class="line"></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo vi /etc/lirc/lircd.conf</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">begin remote</span><br><span class="line"></span><br><span class="line">  name  device   # 设备名称</span><br><span class="line">  flags RAW_CODES</span><br><span class="line">  eps            30</span><br><span class="line">  aeps          100</span><br><span class="line"></span><br><span class="line">  gap          38000</span><br><span class="line"></span><br><span class="line">      begin raw_codes</span><br><span class="line"></span><br><span class="line">          name on    # 操作名称</span><br><span class="line"></span><br><span class="line">            3432     3543      841      896      845      919</span><br><span class="line">            821      894      845     2668      820      898</span><br><span class="line">            842      895      845     2643      845      897</span><br><span class="line">            ......</span><br><span class="line">            796     2693      795      945      794     2692</span><br><span class="line">            794     2694      793      945      794      945</span><br><span class="line">            796      944      820     2667      795     2696</span><br><span class="line">            792      944      821     2667      819     2668</span><br><span class="line">            794      945      796      945     3444     3537</span><br><span class="line"></span><br><span class="line">      end raw_codes</span><br><span class="line"></span><br><span class="line">end remote</span><br></pre></td></tr></table></figure>
+
+<p>重启lirc服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo &#x2F;etc&#x2F;init.d&#x2F;lirc restart</span><br></pre></td></tr></table></figure>
+
+<h1 id="发送信号"><a href="#发送信号" class="headerlink" title="发送信号"></a>发送信号</h1><p>接下来，我们将采集到的信号重新通过红外发送管发送出去。<strong>记得将发送管的线插回去</strong>。</p>
+<p><strong>这里我们需要注意的是，如果电路那边没有添加三极管去做信号放大，那么我们测试时需要将发送管的距离以及对准的位置调整一下。</strong></p>
+<p><strong>如果已经很接近了，但是仍旧没有信号，可以使用手机，打开摄像头，发送信号时，查看发送管有无紫色光闪烁，如果有，说明是有进行信号发送的操作的，只是可能接收端并没有识别出来。</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> irsend SEND_ONCE device on</span></span><br></pre></td></tr></table></figure>
+
+<p>如果一切正常，上边这条命令就能顺利的执行你对着红外接收管录入的那条指令给设备了，例如我录入的是开启空调。</p>
+<p>这里说个题外话，空调是一种比较特殊的红外遥控设备，它不像电视一类的设备，开就是开，声音加就是加，是一条条单一的指令。而空调是一组场景的描述指令，例如开空调的指令，它里边包含了开机状态，制冷模式，制冷温度等信息的组合。</p>
+<p>到此，我就顺利的控制到了我的空调，除此之外，我还使用上边的方式遥控过公司里边的风扇，似乎都是行得通的。</p>
+<h1 id="接入HomeKit"><a href="#接入HomeKit" class="headerlink" title="接入HomeKit"></a>接入HomeKit</h1><p>这里推荐以下我写的一个小工具 <a href="https://github.com/classlfz/satoshi" target="_blank" rel="noopener">satoshi</a>，目前仍在完善当中。使用它就可以通过一个配置文件轻松简单的将上边实现的空调映射到HomeKit里边去了。</p>
+<p>只不过，因为该工具使用的库未能接入空调，苹果的HomeKit是有空调这个设备类型的，到了satoshi这里就只能模拟出一个开关来进行简单的控制空调的开关，比较鸡肋…同时，因为该工具依赖于lirc控制红外设备，所以必须在处理执行完以上lirc的部署后，才能顺利的通过HomeKit来操作设备。</p>
+<p><strong>以下仅做一些简单的介绍，详细的接入方式可参考文档，而且项目还处于初期，接口上可能会频繁变化。</strong></p>
+<p>首先<a href="https://github.com/classLfz/satoshi/releases" target="_blank" rel="noopener">下载好satoshi</a></p>
+<h2 id="生成配置文件"><a href="#生成配置文件" class="headerlink" title="生成配置文件"></a>生成配置文件</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> satoshi config init</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="修改配置文件-1"><a href="#修改配置文件-1" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>默认配置文件位于 <code>~/.satoshi/config.yaml</code></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo vi ~/.satoshi.config.yaml</span></span><br></pre></td></tr></table></figure>
+
+<p>格式参考如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">satoshi:</span><br><span class="line">    devices:     # 这部分是提供http接口</span><br><span class="line">        - id: &#39;1&#39;</span><br><span class="line">          type: aircon</span><br><span class="line">          switch_config:</span><br><span class="line">            on_lircd_cmd: &#39;aircon on&#39;</span><br><span class="line">            off_lircd_cmd: &#39;aircon on&#39;</span><br><span class="line">    siri:       # 这部分是模拟HomeKit设备</span><br><span class="line">        - id: 2</span><br><span class="line">          type: switch</span><br><span class="line">          name: aircon</span><br><span class="line">          switch_config:</span><br><span class="line">            on_lircd_cmd: &#39;aircon on&#39;</span><br><span class="line">            off_lircd_cmd: &#39;aircon on&#39;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，我们就可以在苹果手机上下载好<code>家庭/Home</code>这款软件，对设备进行接入了。</p>
+<p><img src="/images/homekit-aircon.jpeg" alt="接入成功"></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>classLfz</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://yoursite.com/2021/04/04/raspberrypi-lirc/">http://yoursite.com/2021/04/04/raspberrypi-lirc/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>你快乐吗？</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/IoT/"># IoT</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2020/08/08/wx-miniprogram-auto-test/">微信小程序自动化测试实践</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+        </div>
+        <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© classLfz | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+</html>
